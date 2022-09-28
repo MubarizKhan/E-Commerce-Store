@@ -59,4 +59,4 @@ gem 'net-smtp', require: false
 
 gem 'devise'
 
-gem 'byebug'
+# gem 'byebug'
