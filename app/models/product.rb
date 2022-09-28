@@ -2,7 +2,10 @@ class Product < ApplicationRecord
   belongs_to :user
   has_many :comments, dependent: :destroy
 
-  after_commit :create_Product_serialID, on: :create
+  # after_commit :create_Product_serialID, on: :create
+  after_create :create_Product_serialID
+
+  has_one_attached :cover_picture
 
   def create_Product_serialID
 

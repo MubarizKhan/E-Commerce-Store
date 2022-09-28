@@ -1,1 +1,8 @@
 <h2> SHow </h2>
+
+
+<%# <%= url_for(@product.images) %> %>
+<%= link_to "click to view image", @product.cover_picture %>
+
+
+<%= image_tag @product.cover_picture, style: "width:500px; display:block" %>

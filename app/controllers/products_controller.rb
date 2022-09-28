@@ -91,7 +91,7 @@ end
   # So we will use a feature of Rails called Strong Parameters to filter params. Think of it as strong typing for params.
 
   def product_params
-    params.require(:product).permit(:name, :id)
+    params.require(:product).permit(:name, :id, :cover_picture)
   end
 # end
 # end
