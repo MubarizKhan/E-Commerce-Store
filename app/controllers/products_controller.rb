@@ -15,17 +15,38 @@ class ProductsController < ApplicationController
 
 
   def edit
-    @product = current_user.products.find(params[:id])
-    if @product.user.id != current_user.id
-      render :errpage
+    begin
+    rescue RecordNotFound => e
+      redirect_to root_path
+      puts "===================================="
+      puts "===================================="
+      puts " You are not allowed, as u are not the creater of this file"
+      puts "===================================="
+      puts "===================================="
     end
-
+    @product = current_user.products.find(params[:id])
   end
 
   def update
     @product = current_user.products.find(params[:id])
+    begin
+      rescue RecordNotFound => e
+        redirect_to root_path
+        puts "===================================="
+        puts "===================================="
+        puts " You are not allowed, as u are not the creater of this file"
+        puts "===================================="
+        puts "===================================="
+    end
+
+    puts "===================================="
+    puts "===================================="
+    puts @product.name
+    puts "===================================="
+    puts "===================================="
     if @product.update(product_params)
-      redirect_to @product
+      puts @product.name
+      redirect_to root_path
     else
       render :edit
     end
