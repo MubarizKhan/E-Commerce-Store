@@ -8,18 +8,17 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
 
   # has_many :comments, dependent: :destroy
-  has_one_attached :cover_picture
+  has_one_attached :display_picture
 
 
 
-  # attr_accessor :full_name
-  # before_validation :set_names
+  attr_accessor :first_name
+  attr_accessor :last_name
+  before_create :set_names
 
    private
 
-  #  def set_names
-  #     names = full_name.split
-  #     self.first_name = names.first
-  #     self.last_name = names.last
-  #  end
+   def set_names
+      self.full_name = first_name + last_name
+   end
 end
