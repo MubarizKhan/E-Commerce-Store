@@ -8,6 +8,8 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
 
   # has_many :comments, dependent: :destroy
+  has_one_attached :cover_picture
+
 
 
   # attr_accessor :full_name
