@@ -1,0 +1,7 @@
+<h2> edit </h2>
+<%# <%= render 'comments/form' %> %>
+<%= form_for [@product , @comment]  do |f| %>
+
+<%= f.text_field :body %>
+<%= f.submit %><% end %>
+

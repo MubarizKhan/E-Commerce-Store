@@ -3,9 +3,10 @@
 
 <%# <%= url_for(@product.images) %> %>
 <%# <%= link_to "click to view image", @product.cover_picture %>
-<%# <%= image_tag @product.cover_picture, style: "width:500px; display:block" %> %> %>
+<%= image_tag @product.cover_picture, style: "width:500px; display:block" %>
 
-<%# <%= render @product.comments %> %>
+<%# <%= render @product.comments %>
+<%# <div > %>
 <%= render 'comments/comment', locals: {product: @product} %>
 
 <h2>Add a comment:</h2>
