@@ -1,10 +1,15 @@
 class CommentsController < ApplicationController
-  def create
-    # if user_signed_in?
 
+  def new
+    @product = current_user.products.find(params[:product_id])
+
+  end
+  def create
+    # if use_signed_in?
     @product = current_user.products.find(params[:product_id])
     @comment = @product.comments.create(comment_params)
-    redirect_to article_path(@article)
+    @comment.save
+    redirect_to product_path(@product) #article_path(@article)
     # end
   end
 

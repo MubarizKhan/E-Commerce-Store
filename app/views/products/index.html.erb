@@ -1,8 +1,13 @@
 <h1> hello </h1>
 
 <%# destroy_user_session_path %>
-<%# <%= link_to "sign out", destroy_user_session_path, method: :delete %> %>
+<%# <%= link_to "sign out", destroy_user_session_path, method: :delete %>
 <%# destroy_user_session_path %>
+
+<%# <%= image_tag current_user.display_picture, style: "width:500px; display:block" %> %>
+<%# <%= link_to "click to view image", current_user.display_picture %> %>
+
+
 <%= link_to "Sign Out", destroy_user_session_path, method: :delete %>
 <br>
 <%= link_to "CREATE NEW PRODUCT", new_product_path %>
@@ -11,14 +16,15 @@
 
 <ul>
   <% @products.each do |product|%>
-  <br>
+  <%# <br> %>
   <li><%= link_to product.name, product %>
-  <% if current_user.id == product.user_id %>
-    <%= link_to "edit product", edit_product_path(product.id) %>
-  <% end %>
-  <%= link_to "show product", product_path(product.id) %></li>
-  <%= product.user_id %></li>
+      <% if current_user.id == product.user_id %>
+        <%= link_to "edit product", edit_product_path(product.id) %>
+      <% end %>
+      <%= link_to "show product", product_path(product.id) %></li>
+      <%= product.user_id %>
+  </li>
 </ul>
-  <% end %>
+<% end %>
 
 
