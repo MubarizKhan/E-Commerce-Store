@@ -1,16 +1,36 @@
 class CommentsController < ApplicationController
 
-  def new
+  def index
     @product = current_user.products.find(params[:product_id])
-
+    # @comment = @product.comments.newx
   end
+
   def create
-    # if use_signed_in?
-    @product = current_user.products.find(params[:product_id])
-    @comment = @product.comments.create(comment_params)
-    @comment.save
-    redirect_to product_path(@product) #article_path(@article)
-    # end
+    # if user_signed_in?
+      # @product = Product.find(params[:product_id])
+      @product = current_user.products.find(params[:product_id])
+      if @product
+        print "---------product is true---------------"
+        print @product
+        print "------------------------"
+        # user_id: current_user.id, article_id: @article.id)
+        # @product = current_user.products.find(params[:product_id])
+        @comment = @product.comments.create(comment_params)
+        @comment.user_id = current_user.id
+        if @comment.save
+          print "---------comment is saved!---------------"
+          redirect_to product_path(@product)
+        else
+          print "---------comment NOT saved!---------------"
+          print @comment
+          print current_user.id
+          # print :body
+          # prkmkint "---------------------------"
+        end
+      else
+        redirect_to root_path
+    # redirect_to product_path(@product) #article_path(@article)
+    end
   end
 
   # def edit
@@ -34,7 +54,7 @@ class CommentsController < ApplicationController
   private
 
   def comment_params
-    params.require(:comment).permit(:body)
+    params.require(:comment).permit(:body ,:user_id, :product_id)
   end
 
 end
