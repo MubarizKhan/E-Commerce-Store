@@ -9,28 +9,26 @@ class CommentsController < ApplicationController
     # if user_signed_in?
       # @product = Product.find(params[:product_id])
       @product = current_user.products.find(params[:product_id])
-      if @product
-        print "---------product is true---------------"
-        print @product
-        print "------------------------"
-        # user_id: current_user.id, article_id: @article.id)
-        # @product = current_user.products.find(params[:product_id])
+      # if @product
+        # print "---------product is true---------------"
+        # print @product
+        # print "------------------------"
         @comment = @product.comments.create(comment_params)
         @comment.user_id = current_user.id
         if @comment.save
           print "---------comment is saved!---------------"
           redirect_to product_path(@product)
-        else
-          print "---------comment NOT saved!---------------"
-          print @comment
-          print current_user.id
+        # else
+          # print "---------comment NOT saved!---------------"
+          # print @comment
+          # print current_user.id
           # print :body
           # prkmkint "---------------------------"
         end
-      else
-        redirect_to root_path
+      # else
+        # redirect_to root_path
     # redirect_to product_path(@product) #article_path(@article)
-    end
+      # end
   end
 
   # def edit
@@ -50,6 +48,18 @@ class CommentsController < ApplicationController
   #     render :edit
   #   end
   # end
+
+  def destroy
+    @product = current_user.products.find(params[:id])
+    @comment = @product.comments.find(params[:product_id])
+    # @user = User.find(params[:id])
+    @comment.destroy
+    respond_to do |format|
+      format.html { redirect_to root_path, notice: '@comment was successfully destroyed.' }
+      # format.json { head :no_content }
+      format.js { render :layout => false }
+    end
+  end
 
   private
 

@@ -1,8 +1,10 @@
 
-<p>
-  <%= comment.id%>
-  <strong>Comment: </strong>
-  <%= comment.body %>
-  <%= link_to "edit article comment",  edit_product_comment_path(comment.id) %></li>
 
-</p>
+
+<% @product.comments.each do |c| %>
+
+  <li><%= c.body %></li>
+  <li><%= c.user_id %></li>
+  <li><%= link_to 'Destroy', product_comment_path(c.id), method: :delete,class:'remove_comment', data: { confirm: 'Are you sure?' }, :remote => true %></li>
+
+<% end %>
