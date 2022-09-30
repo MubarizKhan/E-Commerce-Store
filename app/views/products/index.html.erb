@@ -13,8 +13,8 @@
 <%= link_to "Sign Out", destroy_user_session_path, method: :delete %>
 <br>
 <%= link_to "CREATE NEW PRODUCT", new_product_path %>
-
-<%= button_to "create to cart", carts_path, method: :get %>
+ <%# cart_path  %>
+<%= link_to "create to cart", carts_path, method: :get %>
 
 
 
@@ -26,8 +26,8 @@
         <%= link_to "edit product", edit_product_path(product.id) %>
       <% end %>
       <%= link_to "show product", product_path(product.id) %></li>
-      <%= product.user_id %>
-      <%= button_to "Add #{product.name} to cart" %>
+      <%# <%= product.user_id %>
+      <%# <%= button_to "Add #{product.name} to cart" %> %> %>
   </li>
 </ul>
 <% end %>
