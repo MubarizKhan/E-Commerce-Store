@@ -2,6 +2,9 @@ class Product < ApplicationRecord
   belongs_to :user
   has_many :comments, dependent: :destroy
 
+
+  has_many :line_items
+  has_many :carts, through: :line_items
   # after_commit :create_Product_serialID, on: :create
   after_create :create_Product_serialID
 
