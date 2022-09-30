@@ -7,11 +7,21 @@
       <%= form.file_field :cover_picture%>
     </div>
 
-    <div class="mb-3">
-    <div class="field form-group">
+  <div class="mb-3">
+  <div class="field form-group">
     <%= form.label :name %><br>
     <%= form.text_field :name %>
     <% @product.errors.full_messages_for(:name).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+  </div>
+
+  <div class="mb-3">
+    <div class="field form-group">
+    <%= form.label :item_quantity %><br>
+    <%= form.text_field :item_quantity %>
+    <% @product.errors.full_messages_for(:item_quantity).each do |message| %>
       <div><%= message %></div>
     <% end %>
   </div>
