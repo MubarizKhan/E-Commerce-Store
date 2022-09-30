@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   end
   resources :users
 
+  resources :carts
+
   root 'products#index'
 
   # resources :stars
