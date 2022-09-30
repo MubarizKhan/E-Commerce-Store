@@ -9,6 +9,7 @@ class User < ApplicationRecord
 
   # has_many :comments, dependent: :destroy
   has_one_attached :display_picture
+  has_one :cart
 
 
 

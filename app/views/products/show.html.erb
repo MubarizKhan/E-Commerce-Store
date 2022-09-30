@@ -1,9 +1,11 @@
-<h2> SHow </h2>
+<h2> <%= @product.name%> </h2>
 
 
 <%# <%= url_for(@product.images) %> %>
 <%# <%= link_to "click to view image", @product.cover_picture %>
 <%= image_tag @product.cover_picture, style: "width:500px; display:block" %>
+<p>In show page </p>
+<p> Item quantity is <%= @product.item_quantity%> </p>
 
 <%# <%= render @product.comments %>
 <%# <div > %>
