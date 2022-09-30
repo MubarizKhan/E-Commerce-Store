@@ -23,6 +23,7 @@
       <% end %>
       <%= link_to "show product", product_path(product.id) %></li>
       <%= product.user_id %>
+      <%= button_to "Add #{product.name} to cart" %>
   </li>
 </ul>
 <% end %>

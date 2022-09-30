@@ -1,13 +1,13 @@
-<h2> <%= @product.name%> </h2>
+<h2> <%= @product.name%>  In products#show page</h2>
 
 
 <%# <%= url_for(@product.images) %> %>
 <%# <%= link_to "click to view image", @product.cover_picture %>
 <%= image_tag @product.cover_picture, style: "width:500px; display:block" %>
-<p>In show page </p>
 <p> Item quantity is <%= @product.item_quantity%> </p>
 
 <%# <%= render @product.comments %>
+<%= button_to "Add #{@product.name} to cart" %>
 <%# <div > %>
 <%= render 'comments/comment', locals: {product: @product} %>
 
