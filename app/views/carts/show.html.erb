@@ -1,4 +1,18 @@
 <h1> <%= @current_cart %> </h1>
 <h1> we are going to show line items here </h1>
 
-<%# <% %> %>
+
+<br>
+<%= @current_cart.line_items.first.product_id %>
+<br>
+<% @current_cart.line_items.each do |item| %>
+  <br>
+  <%= item.product_id  %>
+  <%= item.cart_id  %>
+  <%= item.quantity  %>
+  <%= item.product.name %>
+
+<% end %>
+
+
+<%#  %>
