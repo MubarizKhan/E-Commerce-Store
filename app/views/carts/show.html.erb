@@ -12,7 +12,7 @@
   </button>
 
 <div class="modal" id="myModal">
-  <div class="modal-dialog ">
+  <div class="modal-dialog modal-dialog-scrollable modal-xl">
     <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title">Modal Heading</h4>
@@ -24,10 +24,12 @@
         <thead>
             <tr>
               <th scope="col"> product name </th>
-              <th scope="col"> ID </th>
+              <th scope="col"> product ID </th>
               <th scope="col"> Cart ID </th>
               <th scope="col"> quantity </th>
               <th scope="col"> price </th>
+              <th scope="col"> Add </th>
+              <th scope="col"> delete </th>
             </tr>
           </thead>
           <%# <br> %>
@@ -38,7 +40,9 @@
               <td><%= item.product_id %></td>
               <td><%= item.cart_id  %> </td>
               <td><%= item.quantity  %></td>
-              <td><button type="button" class="btn btn-danger"> AC </button></td>
+              <td><button type="button" class="btn btn-danger"> price </button></td>
+              <td><button type="button" class="btn btn-danger"> Add </button></td>
+              <td><button type="button" class="btn btn-danger"> delete </button></td>
             </tr>
             <% end %>
           </tbody>
@@ -47,6 +51,23 @@
       <%# <div class="modal-footer">
         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close modal</button>
       </div> %>
+      <%# <p>
+        dddddddddddddddddddddddddd
+        </br> ddddddddddddddddddddddddddddddddddddddd
+        </br>
+        ddddddddddddddddddddddddddddddddddddddddd</br>
+        dddddddddddddddddddddddddddddddddddddddddddddddddddd</br>dddddddddddddddddddddd
+        </br>dddddddddddddddddddddddddddddddd</br>
+        dddddddddddddddddddddddddddddd</br>dddddddddddddddddddddddddddddddddddddd
+        </br>dddddddddddddddddddddddddddddddddddddd </br>
+        ddddddddddddddddddddddddddddddddddddddddddddd
+        </br>
+        ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd</br>
+        ddddddddddddddddddddddddddddddddddddddddddd</br>
+        ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd</br>
+        dddddddddddddddddddddddddddddddddddddddddddddddddddddd</br>
+        dddddddddddddddddddddddddddddddddddddddddddddddddddd
+      </p> %>
     </div>
   </div>
 </div>

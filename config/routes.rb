@@ -6,10 +6,11 @@ Rails.application.routes.draw do
   resources :products do
     resources :comments
   end
+
+
+  resource :carts
+  resources :line_items
   resources :users
-
-  resources :carts
-
   root 'products#index'
 
   # resources :stars
