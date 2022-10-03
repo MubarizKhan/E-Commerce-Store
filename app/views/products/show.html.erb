@@ -8,7 +8,7 @@
 <%# <%= render @product.comments %>
 <%# <%= button_to "subscribe", subscriptions_path(feed_url: @feed.feed_url, :method => :post)%>
 <%# <%= link_to %> %>
-<%= link_to "add to cart", line_items_path(product_id: @product.id), method: :post %>
+<%= link_to "add to cart", carts_line_items_path(product_id: @product.id), method: :post %>
 
 <%# <div > %>
 <%= render 'comments/comment', locals: {product: @product} %>

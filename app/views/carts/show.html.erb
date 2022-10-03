@@ -87,9 +87,9 @@
               <td><%= item.id %></td>
               <td>
 
-                <%= link_to "+", li_aq_carts_path(item.id), method: :post  %>
+                <%= link_to "+", li_aq_carts_path(item.product_id), method: :post  %>
                 </br>
-                <%= link_to "---",  li_rq_carts_path(item.id),  method: :post %>
+                <%= link_to "---",  li_rq_carts_path(item.product_id),  method: :post %>
 
                 <%# <%= link_to "CREATE NEW PRODUCT", new_product_path %> %>
 
