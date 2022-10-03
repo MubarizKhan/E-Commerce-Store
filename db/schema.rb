@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_09_30_071554) do
+ActiveRecord::Schema.define(version: 2022_10_03_114819) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -77,6 +77,7 @@ ActiveRecord::Schema.define(version: 2022_09_30_071554) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "item_quantity"
+    t.integer "item_price"
     t.index ["user_id"], name: "index_products_on_user_id"
   end
 
@@ -96,9 +97,9 @@ ActiveRecord::Schema.define(version: 2022_09_30_071554) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "carts", "users"
-  add_foreign_key "comments", "products"
+  add_foreign_key "comments", "products", on_delete: :cascade
   add_foreign_key "comments", "users"
   add_foreign_key "line_items", "carts"
-  add_foreign_key "line_items", "products"
-  add_foreign_key "products", "users"
+  add_foreign_key "line_items", "products", on_delete: :cascade
+  add_foreign_key "products", "users", on_delete: :cascade
 end

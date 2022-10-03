@@ -11,7 +11,7 @@ class ProductsController < ApplicationController
   end
 
   def show
-    @product = current_user.products.find(params[:id])
+    @product = Product.find(params[:id])
     # if @product
   end
 
@@ -93,7 +93,7 @@ end
   # So we will use a feature of Rails called Strong Parameters to filter params. Think of it as strong typing for params.
 
   def product_params
-    params.require(:product).permit(:name, :id, :cover_picture,:item_quantity, :first_name, :last_name)
+    params.require(:product).permit(:name, :id, :cover_picture,:item_quantity, :first_name, :last_name, :item_price)
   end
 # end
 # end
