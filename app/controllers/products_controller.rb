@@ -45,7 +45,7 @@ class ProductsController < ApplicationController
     puts "===================================="
     puts @product.name
     puts "===================================="
-    puts "===================================="
+    puts "================================>===="
     if @product.update(product_params)
       puts @product.name
       redirect_to root_path

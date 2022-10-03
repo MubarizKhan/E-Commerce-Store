@@ -43,14 +43,16 @@ class ApplicationController < ActionController::Base
       # byebug
     end
 
+  if current_user
     if session[:cart_id] == nil
       print "============================"
       print "============================"
       print "session[:cart_id] is NULL"
       print "============================"
       @current_cart = Cart.create
-      @current_cart.user_id = current_user.id
+      @current_cart.user_id = current_user. id
       session[:cart_id] = current_user.id
+      end
     end
   end
 end
