@@ -27,9 +27,48 @@
       <% end %>
       <%= link_to "show product", product_path(product.id) %></li>
       <%# <%= product.user_id %>
-      <%# <%= button_to "Add #{product.name} to cart" %> %> %>
+      <%# <%= button_to "Add #{product.name} to cart" %>
   </li>
 </ul>
 <% end %>
+
+
+
+
+
+
+
+
+ <p>Click on the button to open the modal.</p>
+
+  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
+    Open modal
+  </button>
+<!-- The Modal -->
+
+<div class="modal" id="myModal">
+  <div class="modal-dialog ">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Modal Heading</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        Modal body..
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
 
 

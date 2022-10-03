@@ -5,14 +5,48 @@
 <br>
 <%= @current_cart.line_items.first.product_id %>
 <br>
-<% @current_cart.line_items.each do |item| %>
-  <br>
-  <%= item.product_id  %>
-  <%= item.cart_id  %>
-  <%= item.quantity  %>
-  <%= item.product.name %>
-
-<% end %>
 
 
-<%#  %>
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
+    Open modal
+  </button>
+
+<div class="modal" id="myModal">
+  <div class="modal-dialog ">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Modal Heading</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+              <!-- Modal body -->
+      <div class="modal-body">
+        <table class="table">
+        <thead>
+            <tr>
+              <th scope="col"> product name </th>
+              <th scope="col"> ID </th>
+              <th scope="col"> Cart ID </th>
+              <th scope="col"> quantity </th>
+              <th scope="col"> price </th>
+            </tr>
+          </thead>
+          <%# <br> %>
+        <tbody>
+            <% @current_cart.line_items.each do |item| %>
+            <tr>
+              <td><%= item.product.name %></td>
+              <td><%= item.product_id %></td>
+              <td><%= item.cart_id  %> </td>
+              <td><%= item.quantity  %></td>
+              <td><button type="button" class="btn btn-danger"> AC </button></td>
+            </tr>
+            <% end %>
+          </tbody>
+      </div>
+      <!-- Modal footer -->
+      <%# <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close modal</button>
+      </div> %>
+    </div>
+  </div>
+</div>

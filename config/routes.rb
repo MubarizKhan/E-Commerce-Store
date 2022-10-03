@@ -14,3 +14,4 @@ Rails.application.routes.draw do
 
   # resources :stars
 end
+# app/controllers/application_controller.rb
