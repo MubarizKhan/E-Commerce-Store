@@ -8,8 +8,11 @@ Rails.application.routes.draw do
   end
 
 
-  resource :carts
-  resources :line_items
+  resource :carts do
+    resources :line_items
+    post 'line_items/:id/add', to: 'line_items#add_quantity', as: 'li_aq'
+    post 'line_items/:id/red', to: 'line_items#reduce_quantity', as: 'li_rq'
+  end
   resources :users
   root 'products#index'
 

@@ -31,9 +31,29 @@ class LineItemsController < ApplicationController
     @line_item.save
     #   redirect_to cart_path(current_cart)
     # redirect_to cart_path(@current_cart.id)
+    print chosen_product.item_price * @line_item.quantity
+
+  end
+
+  def add_quantity
+    # redirect_to root_path
+    chosen_product = Product.find(params[:product_id])
+    current_cart = @current_cart
+
+    @line_item = current_cart.line_items.find_by(:id)
+    @line_item.quantity += 1
     print "//////////////////////////////"
     print "//////////////////////////////"
-    print "/////// ADDED TO CART  ///////"
+    print "/////// ADDED QUANTITY  ///////"
+    print "//////////////////////////////"
+    print "//////////////////////////////"
+
+  end
+
+  def reduce_quantity
+    print "//////////////////////////////"
+    print "//////////////////////////////"
+    print "/////// Reduced QUANTITY  ///////"
     print "//////////////////////////////"
     print "//////////////////////////////"
   end

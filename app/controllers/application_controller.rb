@@ -16,28 +16,28 @@ class ApplicationController < ActionController::Base
   private
   def current_cart
     if session[:cart_id]
-      print "============================"
-      print "===========CARD ID EXISTS================="
+      # print "============================"
+      # print "===========CARD ID EXISTS================="
       print session[:cart_id]
-      print "=========^^^^^==================="
+      # print "=========^^^^^==================="
       cart = Cart.find_or_create_by(user_id: current_user.id)
 
-      print"======VV====="
+      # print"======VV====="
       print cart
-      print"======VV====="
+      # print"======VV====="
 
       if cart.present?
-        print "/////////////////"
+        # print "/////////////////"
         print cart.present?
-        print "/////////////////"
+        # print "/////////////////"
         @current_cart = cart
         @current_cart.user_id = current_user.id
-        print "============================"
-        print "============THIS IS CURRENT CART================"
+        # print "============================"
+        # print "============THIS IS CURRENT CART================"
         print @current_cart.id
-        print "============================"
+        # print "============================"
       else
-        print "==========CART not present =================="
+        # print "==========CART not present =================="
         session[:cart_id] = nil
       end
       # byebug
@@ -45,10 +45,10 @@ class ApplicationController < ActionController::Base
 
   if current_user
     if session[:cart_id] == nil
-      print "============================"
-      print "============================"
-      print "session[:cart_id] is NULL"
-      print "============================"
+      # print "============================"
+      # print "============================"
+      # print "session[:cart_id] is NULL"
+      # print "============================"
       @current_cart = Cart.create
       @current_cart.user_id = current_user. id
       session[:cart_id] = current_user.id
