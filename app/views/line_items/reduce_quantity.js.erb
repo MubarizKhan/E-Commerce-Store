@@ -1,20 +1,17 @@
-
-
 var quantity = document.getElementById("Q")
-<%# console.log(typeof quantity.innerHTML); %>
+console.log(typeof quantity.innerHTML);
 
 num = 0
 num = + quantity.innerHTML
-num += 1
+num -= 1
 console.log(typeof num, num, "this is num")
 
 str_num = num.toString();
 
-<%# console.log("str_num", str_num) %>
+console.log("str_num in red_Q", str_num)
 
-$('.add_Q').bind('ajax:success', function(evt, data, status, xhr) {
+$('.red_Q').bind('ajax:success', function(evt, data, status, xhr) {
     evt.preventDefault();
     document.getElementById("Q").innerHTML = str_num;
     console.log(document.getElementById("Q").innerHTML)
   })
-
