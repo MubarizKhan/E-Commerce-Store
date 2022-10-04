@@ -19,13 +19,18 @@ class LineItemsController < ApplicationController
       @line_item = current_cart.line_items.find_by(product_id: chosen_product)
       # Iterate the line_item's quantity by one
       if @line_item.quantity.nil?
-        @line_item.quantity = 2
+        @line_item.quantity = 1
       end
       @line_item.quantity += 1
+
+      # if @line_item.quantity = 0
+      #   @line_item.destroy
+      # end
     else
       @line_item = LineItem.new
       @line_item.cart = current_cart
       @line_item.product = chosen_product
+      @line_item.quantity = 1
     end
     # Save and redirect to cart show path
     @line_item.save
@@ -71,6 +76,10 @@ class LineItemsController < ApplicationController
     print @line_item.quantity
     print "//////////////////////////////"
     print "//////////////////////////////"
+
+    if @line_item.quantity == 0
+      @line_item.destroy
+    end
 
   end
 

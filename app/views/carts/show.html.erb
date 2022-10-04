@@ -10,6 +10,7 @@
 <table class="table">
         <thead>
             <tr>
+              <th scope="col"> ID </th>
               <th scope="col"> product name </th>
               <%# <th scope="col"> product ID </th>
               <th scope="col"> Cart ID </th> %>
@@ -21,21 +22,26 @@
           </thead>
           <%# <br> %>
         <tbody>
+
             <% @current_cart.line_items.each do |item| %>
             <tr>
+              <td>
+                <%= check_box_tag 'event_ids[]', item.id %>
+              </td>
+
               <td><%= item.product.name %></td>
 
-              <div id="qty">
+              <%# <div id="qty"> %>
                 <td id="Q"><%= item.quantity  %></td>
-              </div>
+              <%# </div> %>
 
               <td>
-                <div class="row">
-                <div class="col-sm-12 text-center">
-                  <div class="add_Q"> <%= button_to "ADDDDD", li_aq_carts_path(item.product_id), method: :post, class:'btn btn-primary btn-md', remote: true  %></div>
-                  <div class="red_Q"> <%= button_to "REDDDD",  li_rq_carts_path(item.product_id),  method: :post, class:'btn btn-danger btn-md', remote: true %></div>
-                </div>
-                </div>
+                <%# <div class="row"> %>
+                <%# <div class="col-sm-12 text-center"> %>
+                  <div class="add_Q"> <%= button_to "+", li_aq_carts_path(item.product_id), method: :post, class:'btn btn-primary btn-md', remote: true  %></div>
+                  <div class="red_Q"> <%= button_to "--",  li_rq_carts_path(item.product_id),  method: :post, class:'btn btn-danger btn-md', remote: true %></div>
+                <%# </div> %>
+                <%# </div> %>
               </td>
 
               <%# <td>
