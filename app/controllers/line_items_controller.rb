@@ -74,6 +74,21 @@ class LineItemsController < ApplicationController
 
   end
 
+  def destroy
+    print "//////////////////////////////"
+    print "//////////////////////////////"
+    print "/////// DELETE LINEITEM  ///////"
+
+    @line_item = LineItem.find(params[:id])
+    @line_item.destroy
+    respond_to do |format|
+      format.html { redirect_to root_path, notice: '@line_item was successfully destroyed.' }
+      # format.json { head :no_content }
+      format.js { render :layout => false }
+
+  end
+
+
 
   private
 

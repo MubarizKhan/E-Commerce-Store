@@ -16,7 +16,7 @@
               <th scope="col"> Cart ID </th>
               <th scope="col"> quantity </th>
               <th scope="col"> price </th>
-              <th scope="col"> Add/Reduce </th>
+              <th scope="col"> Increase/Decrease </th>
               <th scope="col"> delete </th>
             </tr>
           </thead>
@@ -30,15 +30,28 @@
               <td><%= item.cart_id  %> </td>
               <td id="Q"><%= item.quantity  %></td>
               <td><%= item.id %></td>
+
               <td>
-
-                <%= link_to "ADDDDD", li_aq_carts_path(item.product_id), method: :post, class:'add_Q', :remote => true  %>
-                </br>
-                <%= link_to "REDDDD",  li_rq_carts_path(item.product_id),  method: :post, class:'red_Q', :remote => true %>
-
+                <div class="row">
+                <div class="col-sm-12 text-center">
+                  <div class="add_Q"> <%= button_to "ADDDDD", li_aq_carts_path(item.product_id), method: :post, class:'add_Q btn btn-primary btn-md', remote: true  %></div>
+                  <div class="red_Q"> <%= button_to "REDDDD",  li_rq_carts_path(item.product_id),  method: :post, class:'red_Q btn btn-danger btn-md', remote: true %></div>
+                </div>
+                </div>
               </td>
 
-              <td><button type="button" class="btn btn-danger"> delete </button></td>
+              <%# <td>
+                <div class="row">
+                <div class="col-sm-12 text-center">
+                    <button class="btn btn-primary btn-md">button</button>
+                    <button class="btn btn-danger btn-md">button</button>
+                </div>
+                </div>
+              </td> %>
+              <td> <div class="add_Q"> <%= button_to "Remove",  carts_line_item_path(item.id) , method: :delete, class:'btn btn-primary btn-md', remote: true  %></div></td>
+
             </tr>
             <% end %>
         </tbody>
+
+
