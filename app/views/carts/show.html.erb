@@ -3,7 +3,6 @@
 
 
 <br>
-<%# <%= @current_cart.line_items.first.product_id %> %>
 <br>
 
 
@@ -12,10 +11,10 @@
         <thead>
             <tr>
               <th scope="col"> product name </th>
-              <th scope="col"> product ID </th>
-              <th scope="col"> Cart ID </th>
+              <%# <th scope="col"> product ID </th>
+              <th scope="col"> Cart ID </th> %>
               <th scope="col"> quantity </th>
-              <th scope="col"> price </th>
+              <%# <th scope="col"> price </th> %>
               <th scope="col"> Increase/Decrease </th>
               <th scope="col"> delete </th>
             </tr>
@@ -23,13 +22,12 @@
           <%# <br> %>
         <tbody>
             <% @current_cart.line_items.each do |item| %>
-            <p>item.id</p>
             <tr>
               <td><%= item.product.name %></td>
-              <td><%= item.product_id %></td>
-              <td><%= item.cart_id  %> </td>
-              <td id="Q"><%= item.quantity  %></td>
-              <td><%= item.id %></td>
+
+              <div id="qty">
+                <td id="Q"><%= item.quantity  %></td>
+              </div>
 
               <td>
                 <div class="row">

@@ -1,6 +1,6 @@
 
 
-var quantity = document.getElementById("#Q")
+var quantity = document.getElementById("Q")
 <%# console.log(typeof quantity.innerHTML); %>
 
 num = 0
@@ -14,9 +14,12 @@ str_num = num.toString();
 console.log("str_num", str_num)
 
 $('.add_Q').bind('ajax:success', function(evt, data, status, xhr) {
-    evt.preventDefault();
+    <%# evt.preventDefault(); %>
     document.getElementById("Q").innerHTML = str_num;
-    $(this).closest(".Q").innerHTML = str_num;
+    <%# $(this).closest("td").innerHTML = str_num; %>
+    <%# $(this).closest("td").append(str_num); %>
+    <%# $('#Q').closest("td").replaceWith(str_num); %>
+
     console.log(document.getElementById("Q").innerHTML)
   })
 
