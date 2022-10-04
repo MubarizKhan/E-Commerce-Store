@@ -19,7 +19,7 @@ class LineItemsController < ApplicationController
       @line_item = current_cart.line_items.find_by(product_id: chosen_product)
       # Iterate the line_item's quantity by one
       if @line_item.quantity.nil?
-        @line_item.quantity = 1
+        @line_item.quantity = 2
       end
       @line_item.quantity += 1
     else
@@ -31,7 +31,7 @@ class LineItemsController < ApplicationController
     @line_item.save
     #   redirect_to cart_path(current_cart)
     # redirect_to cart_path(@current_cart.id)
-    print chosen_product.item_price * @line_item.quantity
+    # print chosen_product.item_price * @line_item.quantity
 
   end
 
@@ -85,7 +85,7 @@ class LineItemsController < ApplicationController
       format.html { redirect_to root_path, notice: '@line_item was successfully destroyed.' }
       # format.json { head :no_content }
       format.js { render :layout => false }
-
+    end
   end
 
 

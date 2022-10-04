@@ -48,7 +48,10 @@
                 </div>
                 </div>
               </td> %>
-              <td> <div class="add_Q"> <%= button_to "Remove",  carts_line_item_path(item.id) , method: :delete, class:'btn btn-primary btn-md', remote: true  %></div></td>
+              <td>
+              <div class="delete_lineItem">
+                <%= button_to "Remove",  carts_line_item_path(item.id), method: :delete, data: { confirm: 'Are you sure?'}, class:'delete_ btn btn-primary btn-md', remote: true  %>
+              </div></td>
 
             </tr>
             <% end %>

@@ -26,7 +26,9 @@
         <%= link_to "edit product", edit_product_path(product.id) %>
       <% end %>
       <%= link_to "show product", product_path(product.id) %></li>
-      <%# <%= product.user_id %>
+
+      <%= link_to "add to cart", carts_line_items_path(product_id: product.id), method: :post %>
+
       <%# <%= button_to "Add #{product.name} to cart" %>
   </li>
 </ul>
