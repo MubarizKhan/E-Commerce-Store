@@ -50,6 +50,12 @@ class LineItemsController < ApplicationController
     print "//////////////////////////////"
     @line_item.save
 
+    respond_to do |format|
+      format.html { redirect_to root_path, notice: '@line_item quantity successfully updated.' }
+      # format.json { head :no_content }
+      format.js { render :layout => false }
+    end
+
 
   end
 

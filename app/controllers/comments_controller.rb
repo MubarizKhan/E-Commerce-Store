@@ -12,15 +12,13 @@ class CommentsController < ApplicationController
       @comment.user_id = current_user.id
       if @comment.save
         print "---------comment is saved!---------------"
-        redirect_to product_path(@product)
+        # redirect_to product_path(@product)
       end
-      # @product = current_user.products.find(params[:product_id])
-      # @comment = @product.comments.create(comment_params)
-      # @comment.user_id = current_user.id
-      # respond_to do |format|
-      #   format.html { redirect_to root_path, notice: '@comment was successfully created.' }
-      #   format.js { render :layout => false }
-      # end
+      respond_to do |format|
+        format.html { redirect_to product_path(@product), notice: '@line_item quantity successfully updated.' }
+        # format.json { head :no_content }
+        format.js { render :layout => false }
+      end
   end
 
   def edit
