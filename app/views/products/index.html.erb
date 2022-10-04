@@ -1,38 +1,35 @@
-<h1> hello </h1>
+<h3>hello <%= link_to "Sign Out", destroy_user_session_path, method: :delete %> </h3>
 
 
 
-<%# destroy_user_session_path %>
-<%# <%= link_to "sign out", destroy_user_session_path, method: :delete %>
-<%# destroy_user_session_path %>
-
-<%# <%= image_tag current_user.display_picture, style: "width:500px; display:block" %> %>
-<%# <%= link_to "click to view image", current_user.display_picture %> %>
-
-
-<%= link_to "Sign Out", destroy_user_session_path, method: :delete %>
 <br>
-<%= link_to "CREATE NEW PRODUCT", new_product_path %>
+<%= link_to "| CREATE NEW PRODUCT |", new_product_path %>
  <%# cart_path  %>
 <%= link_to "View cart", carts_path, method: :get %>
 
+<br>
+<br>
+<br>
 
 
-<ul>
-  <% @products.each do |product|%>
-  <%# <br> %>
-  <li><%= link_to product.name, product %>
+
+  <ul>
+    <% @products.each do |product|%>
+    <li>
+      <%= link_to product.name + " |", product %>
+
       <% if current_user.id == product.user_id %>
-        <%= link_to "edit product", edit_product_path(product.id) %>
+        <%= link_to "edit product |", edit_product_path(product.id) %>
       <% end %>
-      <%= link_to "show product", product_path(product.id) %></li>
 
-      <%= link_to "add to cart", carts_line_items_path(product_id: product.id), method: :post %>
+      <%= link_to "show product |", product_path(product.id) %>
+      <%= link_to "add to cart |", carts_line_items_path(product_id: product.id), method: :post %>
+      <% end %>
+    </li>
+    <li> <p> ==================== Seperator ==================== </p> </li>
 
-      <%# <%= button_to "Add #{product.name} to cart" %>
-  </li>
-</ul>
-<% end %>
+  </ul>
+
 
 <div class="row">
     <div class="col-sm-12 text-center">
