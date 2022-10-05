@@ -34,7 +34,7 @@
       </td>
 
       <td>
-        <input type="submit" value="Submit">
+        <input type="submit" value="Order" class="btn btn-primary btn-md">
         </form>
       </td>
 
@@ -49,28 +49,11 @@
 
       <td>
         <div class="delete_lineItem">
-          <%= button_to "Remove",  carts_line_item_path(item.id), method: :delete, data: { confirm: 'Are you sure?'}, class:'delete_ btn btn-primary btn-md', remote: true  %>
+          <%= button_to "Remove",  carts_line_item_path(item.id), method: :delete, data: { confirm: 'Are you sure?'}, class:'delete_ btn btn-danger btn-md', remote: true  %>
         </div>
         <% end %>
       </td>
 
-
-
     </tr>
-          <%# <%= button_to "Remove",  root_path, class:'merge_button btn btn-primary btn-md' %> %>
   </tbody>
-    <%# <%= button_to "Remove",  root_path, class:'merge_button btn btn-primary btn-md' %>   %>
 </table>
-<%# method: :delete, data: { confirm: 'Are you sure?'},  remote: true   %>
-
- <%= button_to "Order", carts_path, method: :get, data: { confirm: 'event_ids[]'}, class:'CBT merge_button btn btn-primary btn-md' %>
-
-
-<%# <%= form_with model: @line_items do |form| %> %>
-          <%# <%= form.check_box :id %> %>
-          <%# <div class="actions"> %>
-              <%# <%= form.submit %> %>
-          <%# </div> %>
-
-
-
