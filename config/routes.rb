@@ -15,6 +15,7 @@ Rails.application.routes.draw do
     # resources :orders
   end
   resources :orders
+
   resources :users
   root 'products#index'
 
