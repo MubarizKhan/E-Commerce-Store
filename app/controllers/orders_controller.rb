@@ -32,8 +32,8 @@ class OrdersController < ApplicationController
   end
 
   def add_to_order
-    @order = Order.new
-    @order.user_id = current_user.id
+    @order = Order.find_by(user_id: current_user.id)
+    # @order.user_id = current_user.id
 
     @line_item = @current_cart.line_items.find(params[:id])
     print @line_item.cart_id
@@ -43,6 +43,12 @@ class OrdersController < ApplicationController
     print @line_item.order_id
 
     print params[:id]
+  end
+
+  def show
+    @order = Order.find_by(user_id: current_user.id)
+    @order_line_items = LineItem.find_by(order_id: @order.id)
+
   end
 
   def order_params

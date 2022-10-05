@@ -23,12 +23,12 @@
   </thead>
 
   <tbody>
-    <% @current_cart.line_items.each do |item| %>
+    <% @order_line_items.each do |item| %>
     <tr>
       <td class="CBT">
         <%# <form action="/carts/orders/new" > %>
         <%# <form action="<% carts_order_path(item.id)%>"> %>
-        <form action="<%= li_on_carts_path(item.id) %>">
+        <form action="<%= order_path(item.id) %>" method="POST">
           <input type="checkbox" name="li_id" value="<% item.id %>">
           <%=item.id %>
 

@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     resources :line_items
     post 'line_items/:id/add', to: 'line_items#add_quantity', as: 'li_aq'
     post 'line_items/:id/red', to: 'line_items#reduce_quantity', as: 'li_rq'
+    get 'line_items/:id/on', to: 'line_items#update_orderNum', as: 'li_on'
     # resources :orders
   end
   resources :orders
