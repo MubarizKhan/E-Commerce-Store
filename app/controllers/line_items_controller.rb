@@ -42,27 +42,19 @@ class LineItemsController < ApplicationController
 
   def update_orderNum
     @order = Order.find_by(user_id: current_user.id)
-    print "/////////////////////"
     print @order.id
-    print "/////////////////////"
-
     # @order.user_id = current_user.id
     @line_item = @current_cart.line_items.find(params[:id])
-    print "/////////////////////"
+
     print @order.id
-    print "/////////////////////"
-    print "/////////////////////"
     print @line_item.cart_id
-    print "/////////////////////"
-    print "/////////////////////"
+
     if @line_item.order_id.nil?
       @line_item.order_id = @order.id
     end
 
     @line_item.save
-    # redirect_to root_path
-    # print @line_item.order_id
-    # print params[:id]
+    redirect_to root_path
   end
 
   def add_quantity

@@ -1,10 +1,14 @@
 class OrdersController < ApplicationController
-  def new
+  def index
     print "########################"
     print "######### NEW ORDER ###############"
     print "########################"
     print "########################"
-    @order = Order.new
+    # @order = Order.new
+    @order = Order.find_by(user_id: current_user.id)
+    @order_line_items = LineItem.find_by(order_id: @order.id)
+    @order_line_items
+
 
 
     # @line_item = @current_cart.line_items.find(params[:li_id])
@@ -16,7 +20,7 @@ class OrdersController < ApplicationController
     # print "<==============this is order"
     # print "########################"
     # print "########################"
-    redirect_to root_path
+    # redirect_to root_path
   end
 
   def create
@@ -45,11 +49,11 @@ class OrdersController < ApplicationController
     print params[:id]
   end
 
-  def show
-    @order = Order.find_by(user_id: current_user.id)
-    @order_line_items = LineItem.find_by(order_id: @order.id)
-
-  end
+  # def show
+    # @order = Order.find_by(user_id: current_user.id)
+    # @order_line_items = LineItem.find_by(order_id: @order.id)
+    # @order_line_items
+  # end
 
   def order_params
     params.require(:order).permit(:user_id)
