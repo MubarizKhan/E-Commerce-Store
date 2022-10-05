@@ -19,15 +19,12 @@
       <%# <th scope="col"> price </th> %>
       <th scope="col"> Increase/Decrease </th>
       <th scope="col"> delete </th>
-
-
     </tr>
   </thead>
-          <%# <br> %>
- <tbody>
+
+  <tbody>
     <% @current_cart.line_items.each do |item| %>
     <tr>
-
       <td class="CBT">
         <form action="<% root_path %>">
           <input type="checkbox" value="<% item.id%>">
@@ -38,9 +35,13 @@
         </form>
       </td>
 
-      <td><%= item.product.name %></td>
-      <%# <div id="qty"> %>
-      <td id="Q"><%= item.quantity  %></td><%# </div> %>
+      <td>
+        <%= item.product.name %>
+      </td>
+
+      <td id="Q">
+        <%= item.quantity %>
+      </td>
 
       <td>
         <div class="add_Q"> <%= button_to "+", li_aq_carts_path(item.product_id), method: :post, class:'btn btn-primary btn-md', remote: true  %></div>
