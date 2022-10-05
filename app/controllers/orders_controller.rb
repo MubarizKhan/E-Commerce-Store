@@ -6,8 +6,10 @@ class OrdersController < ApplicationController
     print "########################"
     # @order = Order.new
     @order = Order.find_by(user_id: current_user.id)
-    @order_line_items = LineItem.find_by(order_id: @order.id)
-    @order_line_items
+    o = @order.id
+    # @order_line_items = LineItem.find_by(order_id: @order.id)
+    # LineItem.where("order_id = 'o'")
+    @order_line_items = LineItem.where(order_id: @order.id)
 
 
 
