@@ -28,7 +28,7 @@
       <td class="CBT">
         <%# <form action="/carts/orders/new" > %>
         <%# <form action="<% carts_order_path(item.id)%>"> %>
-        <form action="<%= carts_order_path(item.id) %>">
+        <form action="<%= order_path(item.id) %>">
           <input type="checkbox" name="li_id" value="<% item.id %>">
           <%=item.id %>
 

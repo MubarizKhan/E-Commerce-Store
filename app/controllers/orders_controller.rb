@@ -25,8 +25,6 @@ class OrdersController < ApplicationController
 
     @line_item = @current_cart.line_items.find(params[:id])
     print @line_item.cart_id
-
-
     @line_item.order_id = @order.id
 
 
