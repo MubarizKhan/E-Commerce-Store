@@ -18,6 +18,7 @@
     <li>
       <%= link_to product.name + " |", product %>
 
+
       <% if current_user.id == product.user_id %>
         <%= link_to "edit product |", edit_product_path(product.id) %>
       <% end %>
@@ -27,8 +28,11 @@
       <% if current_user.id != product.user_id %>
         <%= link_to "add to cart |", carts_line_items_path(product_id: product.id), method: :post %>
       <% end %>
+    </br>
+    </br>
     <% end %>
     </li>
+
     <li> <p> ==================== Seperator ==================== </p> </li>
 
   </ul>

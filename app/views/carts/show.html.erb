@@ -26,14 +26,18 @@
     <% @current_cart.line_items.each do |item| %>
     <tr>
       <td class="CBT">
-        <form action="<% root_path %>">
-          <input type="checkbox" value="<% item.id%>">
+        <%# <form action="/carts/orders/new" > %>
+        <%# <form action="<% carts_order_path(item.id)%>"> %>
+        <form action="<%= carts_order_path(item.id) %>">
+          <input type="checkbox" name="li_id" value="<% item.id %>">
+          <%=item.id %>
+
       </td>
 
-      <td>
-        <input type="submit" value="Order" class="btn btn-primary btn-md">
-        </form>
-      </td>
+        <td>
+          <input type="submit" value="Order" class="btn btn-primary btn-md">
+          </form>
+        </td>
 
       <td>
         <%= item.product.name %>
