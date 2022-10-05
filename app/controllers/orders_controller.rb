@@ -20,6 +20,14 @@ class OrdersController < ApplicationController
   end
 
   def create
+    if Order.find_by(user_id: current_user.id)
+      print "########################"
+      print "###### In IF #########"
+    else
+      print "###### In else #########"
+      Order.create(user_id: current_user.id)
+    end
+    redirect_to root_path
 
   end
 
@@ -35,10 +43,11 @@ class OrdersController < ApplicationController
     print @line_item.order_id
 
     print params[:id]
-
-
-
-
-
   end
+
+  def order_params
+    params.require(:order).permit(:user_id)
+  end
+
+  # end
 end
