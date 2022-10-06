@@ -1,0 +1,4 @@
+$('.rem_lineItem').bind('ajax:success', function() {
+	<%# $('tr').remove(); %>
+  $(this).closest('tr').remove();
+});

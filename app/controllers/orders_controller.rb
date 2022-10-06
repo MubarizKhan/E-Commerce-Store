@@ -47,6 +47,7 @@ class OrdersController < ApplicationController
 
 
     print @line_item.order_id
+    @line_item.save
 
     print params[:id]
   end

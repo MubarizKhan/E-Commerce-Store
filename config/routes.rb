@@ -15,7 +15,12 @@ Rails.application.routes.draw do
     get 'line_items/:id/on', to: 'line_items#update_orderNum', as: 'li_on'
     # resources :orders
   end
+  put 'line_items/:id/remove', to: 'line_items#remove_lineItem_from_order', as: 'li_ro'
   resources :orders
+  # do
+    # resource :line_items
+    #
+  # end
 
 
   resources :users

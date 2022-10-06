@@ -36,8 +36,9 @@ class LineItemsController < ApplicationController
     @line_item.save
     #   redirect_to cart_path(current_cart)
     # redirect_to cart_path(@current_cart.id)
-    # print chosen_product.item_price * @line_item.quantity
-
+    if chosen_product
+      print chosen_product.item_price * @line_item.quantity
+    end
   end
 
   def update_orderNum
@@ -52,6 +53,7 @@ class LineItemsController < ApplicationController
     if @line_item.order_id.nil?
       @line_item.order_id = @order.id
     end
+    @line_item.order_id = @order.id
 
     @line_item.save
     redirect_to root_path
@@ -67,10 +69,17 @@ class LineItemsController < ApplicationController
     print "//////////////////////////////"
     print "//////////////////////////////"
     print "/////// ADDED QUANTITY  ///////"
-    print @line_item.quantity
-    print "//////////////////////////////"
-    print "//////////////////////////////"
+    # print @line_item.quantity
     @line_item.save
+
+    # if chosen_product
+    print "//////////////////////////////"
+    print "//////////////////////////////"
+    print chosen_product.item_price * @line_item.quantity
+    print "//////////////////////////////"
+    print "//////////////////////////////"
+
+    # end
 
     respond_to do |format|
       format.html { redirect_to root_path, notice: '@line_item quantity successfully updated.' }
@@ -112,6 +121,26 @@ class LineItemsController < ApplicationController
       # format.json { head :no_content }
       format.js { render :layout => false }
     end
+  end
+
+  def remove_lineItem_from_order
+    @line_item = LineItem.find(params[:id])
+    print @line_item.order_id
+    # print "same old same old"
+    # print "same old same old"
+    # print "same old same old"
+    # print "same old same old"
+    # if @line_item.order_id != 0
+    @line_item.order_id = 0
+    @line_item.save
+
+    respond_to do |format|
+      format.html { redirect_to root_path, notice: '@line_item destroyed from order' }
+      # format.json { head :no_content }
+      format.js { render :layout => false }
+    end
+
+
   end
 
 
