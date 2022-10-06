@@ -16,28 +16,22 @@
       <%# <th scope="col"> product ID </th>
       <th scope="col"> Cart ID </th> %>
       <th scope="col"> quantity </th>
-      <%# <th scope="col"> price </th> %>
+      <th scope="col"> price </th>
       <%# <th scope="col"> Increase/Decrease </th> %>
-      <th scope="col"> delete </th>
+      <th scope="col"> remove from order </th>
     </tr>
   </thead>
 
   <tbody>
     <% @order_line_items.each do |item| %>
     <tr>
-      <td>
-        <form action="<%= order_path(item.id) %>" method="POST">
-          <input type="checkbox" name="li_id" value="<% item.id %>">
-          <%=item.id %>
-      </td>
-
-        <td>
-          <input type="submit" value="Order" class="btn btn-primary btn-md">
-          </form>
-        </td>
 
       <td>
         <%= item.product.name %>
+      </td>
+
+      <td id="Q">
+        <%= item.quantity %>
       </td>
 
       <td id="Q">
