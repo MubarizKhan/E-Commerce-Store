@@ -18,6 +18,8 @@ Rails.application.routes.draw do
   put 'line_items/:id/remove', to: 'line_items#remove_lineItem_from_order', as: 'li_ro'
   resources :orders
 
+  post 'orders/:id/checkout', to: 'orders#checkout', as: 'orders_co'
+
 
   # do
     # resource :line_items

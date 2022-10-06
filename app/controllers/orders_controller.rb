@@ -1,6 +1,7 @@
 class OrdersController < ApplicationController
   def index
-    @order = Order.find_by(user_id: current_user.id)
+    # @order = Order.find_by(user_id: current_user.id)
+    @order = current_user.orders.last
     @order_line_items = LineItem.where(order_id: @order.id)
     # ;l;l;l
   end
@@ -29,13 +30,19 @@ class OrdersController < ApplicationController
   def update
     @order = Order.find_by(user_id: current_user.id)
     @order.coupon_name = params[:order][:coupon_name]
-    # @order.save
+    @order.save
 
     @coupon = Coupon.find_by(coupon_name: params[:order][:coupon_name])
     # print params.inspect
+  end
+
+  def checkout
+    @order = Order.find_by(user_id: current_user.id)
+    @coupon = Coupon.find_by(coupon_name: @order.coupon_name)
+
     if @coupon
       @order_line_items = LineItem.where(order_id: @order.id)
-        price_var = 0
+      price_var = 0
       LineItem.where(order_id: @order.id).all.each do |c|
         price_var += c.total_line_item_price
       end
@@ -44,6 +51,11 @@ class OrdersController < ApplicationController
       @order.save
     else
       print 'this coupon does not exist'
+    end
+    # print @coupon.coupon_name
+    # print "^^^^"
+
+
   end
 
   def order_params

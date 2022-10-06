@@ -1,7 +1,14 @@
 <h1> <%= @current_cart.id %> </h1>
 <h4> we are going to show line items here but we are in order </h4>
 <h3> duplicate of cart/lineItems; but we have to make modifications </h3>
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal"> Add Coupon </button>
+
+<br><br>
+
+<%= form_with model: @order do |form| %>
+<%= form.label :coupon_name%>
+<%= form.text_field :coupon_name %>
+<%= form.submit class:'btn btn-secondary' %>
+<% end %>
 
 <br><br>
 
@@ -43,40 +50,9 @@
 </table>
 
 
-<p>Click on the button to open the modal.</p>
+
   <div class="row">
     <div class="col-sm-12 text-center">
-        <%= button_to "checkout", root_path, method: :put, data: { confirm: 'Are you sure?'}, class:'delete_ btn btn-secondary btn-md', remote: true  %>
+        <%= button_to "checkout", orders_co_path(@order.id), method: :post, data: { confirm: 'Are you sure?'}, class:'delete_ btn btn-secondary btn-md', remote: true  %>
      </div>
 </div>
-
-
-<!-- The Modal -->
-<div class="modal" id="myModal">
-  <div class="modal-dialog ">
-    <div class="modal-content">
-
-      <!-- Modal Header -->
-      <div class="modal-header">
-        <h4 class="modal-title">Modal Heading</h4>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-      </div>
-
-      <!-- Modal body -->
-      <div class="modal-body">
-        Modal body..
-      </div>
-
-      <!-- Modal footer -->
-      <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<%= form_with model: @order do |form| %>
-<%= form.text_field :coupon_name %>
-<%= form.submit class:'btn btn-secondary' %>
-<% end %>
-<%= params.inspect %>
