@@ -10,19 +10,6 @@ class OrdersController < ApplicationController
     # @order_line_items = LineItem.find_by(order_id: @order.id)
     # LineItem.where("order_id = 'o'")
     @order_line_items = LineItem.where(order_id: @order.id)
-
-
-
-    # @line_item = @current_cart.line_items.find(params[:li_id])
-    # print @line_item
-    # print @current_cart.line_items
-    # print params.inspect
-    # print "<==============this is LIII"
-    # print params[:item_id]
-    # print "<==============this is order"
-    # print "########################"
-    # print "########################"
-    # redirect_to root_path
   end
 
   def create

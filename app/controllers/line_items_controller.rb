@@ -126,17 +126,11 @@ class LineItemsController < ApplicationController
   def remove_lineItem_from_order
     @line_item = LineItem.find(params[:id])
     print @line_item.order_id
-    # print "same old same old"
-    # print "same old same old"
-    # print "same old same old"
-    # print "same old same old"
-    # if @line_item.order_id != 0
     @line_item.order_id = 0
     @line_item.save
 
     respond_to do |format|
       format.html { redirect_to root_path, notice: '@line_item destroyed from order' }
-      # format.json { head :no_content }
       format.js { render :layout => false }
     end
 
