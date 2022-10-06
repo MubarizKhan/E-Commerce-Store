@@ -65,7 +65,7 @@ class LineItemsController < ApplicationController
     print "//////////////////////////////"
     print "/////// ADDED QUANTITY  ///////"
     # print @line_item.quantity
-    @line_item.total_line_item_price = @line_item * chosen_product.item_price
+    @line_item.total_line_item_price = @line_item.quantity * chosen_product.item_price
     @line_item.save
 
     respond_to do |format|
@@ -92,7 +92,7 @@ class LineItemsController < ApplicationController
     if @line_item.quantity == 0
       @line_item.destroy
     else
-      @line_item.total_line_item_price = @line_item * chosen_product.item_price
+      @line_item.total_line_item_price = @line_item.quantity * chosen_product.item_price
     end
   end
 
