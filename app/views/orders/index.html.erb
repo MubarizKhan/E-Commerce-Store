@@ -15,9 +15,9 @@
   </thead>
 
   <tbody>
+
     <% @order_line_items.each do |item| %>
     <tr>
-
       <td>
         <%= item.product.name %>
       </td>
@@ -36,7 +36,10 @@
         </div>
         <% end %>
       </td>
-
     </tr>
+
   </tbody>
 </table>
+
+<%= button_to "checkout", root_path, method: :put, data: { confirm: 'Are you sure?'}, class:'delete_ btn btn-danger btn-md', remote: true  %>
+
