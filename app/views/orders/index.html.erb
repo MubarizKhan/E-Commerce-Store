@@ -44,10 +44,6 @@
 
 
 <p>Click on the button to open the modal.</p>
-
-
-
-
   <div class="row">
     <div class="col-sm-12 text-center">
         <%= button_to "checkout", root_path, method: :put, data: { confirm: 'Are you sure?'}, class:'delete_ btn btn-secondary btn-md', remote: true  %>
@@ -56,7 +52,6 @@
 
 
 <!-- The Modal -->
-
 <div class="modal" id="myModal">
   <div class="modal-dialog ">
     <div class="modal-content">
@@ -73,19 +68,25 @@
         <form class="row g-3">
           <div class="col-md-6">
             <label for="coupon_name" class="form-label">Enter Coupon Name:</label>
-            <input type="text" class="form-control" id="inputAddress2" placeholder="DevnTech">
+            <%= form_with model: @order do |form| %>
+            <%= form.text_field:coupon_id %>
           </div>
         </form>
       </div>
 
       <!-- Modal footer -->
       <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+        <%# <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button> %>
+            <%= form.submit class:'btn btn-secondary' %>
+            <%= params.inspect %>
+            <% end %>
       </div>
-
-
-
     </div>
   </div>
 </div>
 
+<%= form_with model: @order do |form| %>
+<%= form.text_field :coupon_id %>
+<%= form.submit class:'btn btn-secondary' %>
+<% end %>
+<%= params.inspect %>

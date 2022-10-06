@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_10_06_104543) do
+ActiveRecord::Schema.define(version: 2022_10_06_122724) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -84,8 +84,8 @@ ActiveRecord::Schema.define(version: 2022_10_06_104543) do
     t.string "order_status"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "coupon_id"
     t.decimal "order_amount", default: "0.0"
+    t.string "coupon_name"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 

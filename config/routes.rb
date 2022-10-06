@@ -17,6 +17,8 @@ Rails.application.routes.draw do
   end
   put 'line_items/:id/remove', to: 'line_items#remove_lineItem_from_order', as: 'li_ro'
   resources :orders
+
+
   # do
     # resource :line_items
     #

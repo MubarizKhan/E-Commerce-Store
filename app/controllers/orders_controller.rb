@@ -2,6 +2,7 @@ class OrdersController < ApplicationController
   def index
     @order = Order.find_by(user_id: current_user.id)
     @order_line_items = LineItem.where(order_id: @order.id)
+    # ;l;l;l
   end
 
   def create
@@ -13,7 +14,6 @@ class OrdersController < ApplicationController
       Order.create(user_id: current_user.id)
     end
     redirect_to root_path
-
   end
 
   def add_to_order
@@ -24,6 +24,19 @@ class OrdersController < ApplicationController
     # print @line_item.order_id
     @line_item.save
     # print params[:id]
+  end
+
+  def update
+    @order = Order.find_by(user_id: current_user.id)
+    @order.coupon_name = params[:id]
+    @order.save
+    # @order_line_items = LineItem.where(order_id: @order.id)
+    print "------------------------------"
+    print "------------------------------"
+    print params[:id]
+    print "------------------------------"
+    print "------------------------------"
+
   end
 
   def order_params
