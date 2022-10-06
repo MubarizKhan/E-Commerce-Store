@@ -14,5 +14,4 @@ namespace :c_seeds do
   end
 
 end
-# { ‘DevnTech’: 0.3, ‘Pak14’: 0.5 }
 

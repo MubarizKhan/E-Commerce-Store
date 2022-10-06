@@ -85,7 +85,7 @@ ActiveRecord::Schema.define(version: 2022_10_06_104543) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "coupon_id"
-    t.decimal "order_amount"
+    t.decimal "order_amount", default: "0.0"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 

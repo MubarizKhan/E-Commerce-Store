@@ -1,6 +1,7 @@
 <h1> <%= @current_cart.id %> </h1>
 <h4> we are going to show line items here but we are in order </h4>
 <h3> duplicate of cart/lineItems; but we have to make modifications </h3>
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal"> Add Coupon </button>
 
 <br><br>
 
@@ -41,5 +42,50 @@
   </tbody>
 </table>
 
-<%= button_to "checkout", root_path, method: :put, data: { confirm: 'Are you sure?'}, class:'delete_ btn btn-danger btn-md', remote: true  %>
+
+<p>Click on the button to open the modal.</p>
+
+
+
+
+  <div class="row">
+    <div class="col-sm-12 text-center">
+        <%= button_to "checkout", root_path, method: :put, data: { confirm: 'Are you sure?'}, class:'delete_ btn btn-secondary btn-md', remote: true  %>
+     </div>
+</div>
+
+
+<!-- The Modal -->
+
+<div class="modal" id="myModal">
+  <div class="modal-dialog ">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Coupon Name</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <%# Modal body.. %>
+        <form class="row g-3">
+          <div class="col-md-6">
+            <label for="coupon_name" class="form-label">Enter Coupon Name:</label>
+            <input type="text" class="form-control" id="inputAddress2" placeholder="DevnTech">
+          </div>
+        </form>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+      </div>
+
+
+
+    </div>
+  </div>
+</div>
 
