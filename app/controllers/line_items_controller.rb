@@ -23,9 +23,6 @@ class LineItemsController < ApplicationController
       end
       @line_item.quantity += 1
 
-      # if @line_item.quantity = 0
-      #   @line_item.destroy
-      # end
     else
       @line_item = LineItem.new
       @line_item.cart = current_cart
@@ -33,12 +30,10 @@ class LineItemsController < ApplicationController
       @line_item.quantity = 1
     end
     # Save and redirect to cart show path
+    @line_item.total_line_item_price = @line_item.quantity * chosen_product.item_price
     @line_item.save
     #   redirect_to cart_path(current_cart)
     # redirect_to cart_path(@current_cart.id)
-    if chosen_product
-      print chosen_product.item_price * @line_item.quantity
-    end
   end
 
   def update_orderNum
@@ -70,20 +65,11 @@ class LineItemsController < ApplicationController
     print "//////////////////////////////"
     print "/////// ADDED QUANTITY  ///////"
     # print @line_item.quantity
+    @line_item.total_line_item_price = @line_item * chosen_product.item_price
     @line_item.save
-
-    # if chosen_product
-    print "//////////////////////////////"
-    print "//////////////////////////////"
-    print chosen_product.item_price * @line_item.quantity
-    print "//////////////////////////////"
-    print "//////////////////////////////"
-
-    # end
 
     respond_to do |format|
       format.html { redirect_to root_path, notice: '@line_item quantity successfully updated.' }
-      # format.json { head :no_content }
       format.js { render :layout => false }
     end
 
@@ -105,8 +91,9 @@ class LineItemsController < ApplicationController
 
     if @line_item.quantity == 0
       @line_item.destroy
+    else
+      @line_item.total_line_item_price = @line_item * chosen_product.item_price
     end
-
   end
 
   def destroy
