@@ -32,23 +32,18 @@ class OrdersController < ApplicationController
     # @order.save
 
     @coupon = Coupon.find_by(coupon_name: params[:order][:coupon_name])
-    # print "#####################"
-    # print "#####################"
-    # print @coupon.coupon_name
-    # print "#####################"
-    # print "#####################"
-
     # print params.inspect
-    @order_line_items = LineItem.where(order_id: @order.id)
-    price_var = 0
-    ctr = 0
-    LineItem.where(order_id: @order.id).all.each do |c|
-      print ">>>>>>>> >>>"
-      price_var += c.total_line_item_price
-    end
-    print price_var * (1 - @coupon.discount)
-    @order.order_amount = price_var * (1 - @coupon.discount)
-    @order.save
+    if @coupon
+      @order_line_items = LineItem.where(order_id: @order.id)
+        price_var = 0
+      LineItem.where(order_id: @order.id).all.each do |c|
+        price_var += c.total_line_item_price
+      end
+      print price_var * (1 - @coupon.discount)
+      @order.order_amount = price_var * (1 - @coupon.discount)
+      @order.save
+    else
+      print 'this coupon does not exist'
   end
 
   def order_params
