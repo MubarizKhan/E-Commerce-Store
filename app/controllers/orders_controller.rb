@@ -40,28 +40,16 @@ class OrdersController < ApplicationController
 
     # print params.inspect
     @order_line_items = LineItem.where(order_id: @order.id)
-
     price_var = 0
     ctr = 0
-    # Customer.where(first_name: 'does not exist')
-    # print "%%%%%%%%%%%%%%% >>>"
     LineItem.where(order_id: @order.id).all.each do |c|
       print ">>>>>>>> >>>"
-      price_var = c.total_line_item_price
+      price_var += c.total_line_item_price
     end
-    # @order.order_amount = (price_var * (1 - @coupon.discount))
-    # @order.save
+    print price_var * (1 - @coupon.discount)
+    @order.order_amount = price_var * (1 - @coupon.discount)
+    @order.save
   end
-
-    # print "#####################"
-    # print "#####################"
-    # print params[:order][:coupon_name]
-    # print "#####################"
-    # print "#####################"
-    # print
-    # print params.inspect
-
-
 
   def order_params
     params.require(:order).permit(:user_id)
