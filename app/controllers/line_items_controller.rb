@@ -2,7 +2,7 @@ class LineItemsController < ApplicationController
   def index
     print "--------------------"
     print "--------------------"
-    print "---------Line Items-----------"
+    print "---------Line Items---"
     print "--------------------"
     print "--------------------"
   end
@@ -32,8 +32,6 @@ class LineItemsController < ApplicationController
     # Save and redirect to cart show path
     @line_item.total_line_item_price = @line_item.quantity * chosen_product.item_price
     @line_item.save
-    #   redirect_to cart_path(current_cart)
-    # redirect_to cart_path(@current_cart.id)
   end
 
   def update_orderNum
@@ -41,9 +39,6 @@ class LineItemsController < ApplicationController
     print @order.id
     # @order.user_id = current_user.id
     @line_item = @current_cart.line_items.find(params[:id])
-
-    print @order.id
-    print @line_item.cart_id
 
     if @line_item.order_id.nil?
       @line_item.order_id = @order.id
@@ -82,30 +77,26 @@ class LineItemsController < ApplicationController
     @line_item = current_cart.line_items.find_by(product_id: chosen_product)
     @line_item.quantity -= 1
     @line_item.save
-    print "//////////////////////////////"
-    print "//////////////////////////////"
     print "/////// Reduced QUANTITY  ///////"
     print @line_item.quantity
-    print "//////////////////////////////"
-    print "//////////////////////////////"
 
     if @line_item.quantity == 0
       @line_item.destroy
     else
       @line_item.total_line_item_price = @line_item.quantity * chosen_product.item_price
     end
+
+    respond_to do |format|
+      format.html { redirect_to root_path, notice: '@line_item was successfully destroyed.' }
+      format.js { render :layout => false }
+    end
   end
 
   def destroy
-    print "//////////////////////////////"
-    print "//////////////////////////////"
-    print "/////// DELETE LINEITEM  ///////"
-
     @line_item = LineItem.find(params[:id])
     @line_item.destroy
     respond_to do |format|
       format.html { redirect_to root_path, notice: '@line_item was successfully destroyed.' }
-      # format.json { head :no_content }
       format.js { render :layout => false }
     end
   end
@@ -120,11 +111,7 @@ class LineItemsController < ApplicationController
       format.html { redirect_to root_path, notice: '@line_item destroyed from order' }
       format.js { render :layout => false }
     end
-
-
   end
-
-
 
   private
 

@@ -1,13 +1,13 @@
-<h2> new </h2>
+<h2> we are in new </h2>
 
 <%= form_with model: @product do |form| %>
     <div class='form-group'>
-      <%= form.label :cover_picture %>
+      <%= form.label :cover_picture%>
       <%= form.file_field :cover_picture%>
 
     </div>
 
-    <div class="mb-3">
+    <div class="mb-3 row">
     <div class="field form-group">
     <%= form.label :name %><br>
     <%= form.text_field :name %>
@@ -17,7 +17,7 @@
   </div>
   </div>
 
-  <div class="mb-3">
+  <div class="mb-3 row">
   <div class="field form-group">
     <%= form.label :item_price %><br>
     <%= form.text_field :item_price %>
@@ -27,7 +27,7 @@
   </div>
   </div>
 
-  <div class="mb-3">
+  <div class="mb-3 row">
   <div class="field form-group">
     <%= form.label :item_quantity %><br>
     <%= form.text_field :item_quantity %>
@@ -36,18 +36,6 @@
     <% end %>
   </div>
   </div>
-
-    <%# <%= form_with model: @products do |form| %> %>
-
-<%# <%= form.check_box :pet_dog %> %>
-<%# <%= form.label :pet_dog, "I own a dog" %> %>
-<%# <%= form.check_box :pet_cat %> %>
-<%# <%= form.label :pet_cat, "I own a cat" %> %>
-
-<%# <%= form.select :city, ["Berlin", "Chicago", "Madrid"] %> %>
-
-
-
 
   </br>
   <div class="actions">

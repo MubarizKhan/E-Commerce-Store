@@ -12,7 +12,6 @@ class ProductsController < ApplicationController
 
   def show
     @product = Product.find(params[:id])
-    # if @product
   end
 
 
@@ -40,12 +39,7 @@ class ProductsController < ApplicationController
         puts "===================================="
         puts "===================================="
     end
-
-    puts "===================================="
-    puts "===================================="
     puts @product.name
-    puts "===================================="
-    puts "================================>===="
     if @product.update(product_params)
       puts @product.name
       redirect_to root_path
@@ -56,10 +50,7 @@ class ProductsController < ApplicationController
 
 
   def create
-    # @article.paragraph.name =  ">"
-
     @product = current_user.products.create(product_params)
-    print('c here')
     if @product.save
       redirect_to root_path
     else
@@ -67,7 +58,7 @@ class ProductsController < ApplicationController
     end
   end
 
-end
+# end
 
   # def destroy
   #   @article = Article.find(params[:id])
@@ -96,7 +87,7 @@ end
     params.require(:product).permit(:name, :id, :cover_picture,:item_quantity, :first_name, :last_name, :item_price)
   end
 # end
-# end
+end
 
 
 

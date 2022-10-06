@@ -1,16 +1,13 @@
 <h2> <%= @current_cart.id%>  In products#show page</h2>
 <h2> <%= @product.name %> </h2>
-<%# <h2> <%= current_user.cart.id%>
 
 <%= image_tag @product.cover_picture, style: "width:500px; display:block" %>
 <p> Item quantity is <%= @product.item_quantity%> </p>
 
-<%# <%= render @product.comments %>
-<%# <%= button_to "subscribe", subscriptions_path(feed_url: @feed.feed_url, :method => :post)%>
-<%# <%= link_to %> %>
-<%= link_to "add to cart", carts_line_items_path(product_id: @product.id), method: :post %>
+<% if @product.user_id != current_user.id%>
+  <%= link_to "add to cart", carts_line_items_path(product_id: @product.id), method: :post %>
+<% end %>
 
-<%# <div > %>
 <%= render 'comments/comment', locals: {product: @product} %>
 
 <h2>Add a comment:</h2>
