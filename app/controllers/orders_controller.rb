@@ -28,16 +28,40 @@ class OrdersController < ApplicationController
 
   def update
     @order = Order.find_by(user_id: current_user.id)
-    @order.coupon_name = params[:id]
-    @order.save
-    # @order_line_items = LineItem.where(order_id: @order.id)
-    print "------------------------------"
-    print "------------------------------"
-    print params[:id]
-    print "------------------------------"
-    print "------------------------------"
+    @order.coupon_name = params[:order][:coupon_name]
+    # @order.save
 
+    @coupon = Coupon.find_by(coupon_name: params[:order][:coupon_name])
+    # print "#####################"
+    # print "#####################"
+    # print @coupon.coupon_name
+    # print "#####################"
+    # print "#####################"
+
+    # print params.inspect
+    @order_line_items = LineItem.where(order_id: @order.id)
+
+    price_var = 0
+    ctr = 0
+    # Customer.where(first_name: 'does not exist')
+    # print "%%%%%%%%%%%%%%% >>>"
+    LineItem.where(order_id: @order.id).all.each do |c|
+      print ">>>>>>>> >>>"
+      price_var = c.total_line_item_price
+    end
+    # @order.order_amount = (price_var * (1 - @coupon.discount))
+    # @order.save
   end
+
+    # print "#####################"
+    # print "#####################"
+    # print params[:order][:coupon_name]
+    # print "#####################"
+    # print "#####################"
+    # print
+    # print params.inspect
+
+
 
   def order_params
     params.require(:order).permit(:user_id)
