@@ -7,7 +7,7 @@
 
 
 
-<table class="table table-striped">
+<table class="table table-striped table-bordered">
   <thead>
     <tr>
       <th scope="col"> Select </th>
@@ -25,13 +25,10 @@
   <tbody>
     <% @order_line_items.each do |item| %>
     <tr>
-      <td class="CBT">
-        <%# <form action="/carts/orders/new" > %>
-        <%# <form action="<% carts_order_path(item.id)%>"> %>
+      <td>
         <form action="<%= order_path(item.id) %>" method="POST">
           <input type="checkbox" name="li_id" value="<% item.id %>">
           <%=item.id %>
-
       </td>
 
         <td>
