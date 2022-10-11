@@ -4,9 +4,8 @@
 <%= image_tag @product.cover_picture, style: "width:500px; display:block" %>
 <p> Item quantity is <%= @product.item_quantity%> </p>
 
-<% if @product.user_id != current_user.id%>
-  <%= link_to "add to cart", carts_line_items_path(product_id: @product.id), method: :post %>
-<% end %>
+
+<%= link_to "add to cart", carts_line_items_path(product_id: @product.id), method: :post %>
 
 <%= render 'comments/comment', locals: {product: @product} %>
 

@@ -1,14 +1,14 @@
 
 
 
-<% @product.comments.each do |c| %>
+<% @product.comments.each do |comment| %>
 
-  <li><%= c.body %></li>
-  <li><%= c.user_id %></li>
-  <li><%= c.id %></li>
-  <li><%= link_to 'Edit', edit_product_comment_path(c.id) %></li>
+  <li><%= comment.body %></li>
+  <li><%= comment.user_id %></li>
+  <li><%= comment.id %></li>
+  <li><%= link_to 'Edit', edit_product_comment_path(@product, comment) %></li>
 
 
-  <li><%= link_to 'Destroy', product_comment_path(c.id), method: :delete,class:'remove_comment', data: { confirm: 'Are you sure?' }, :remote => true %></li>
+  <li><%= link_to 'Destroy', product_comment_path(@product.id), method: :delete,class:'remove_comment', data: { confirm: 'Are you sure?' }, :remote => true %></li>
 
 <% end %>

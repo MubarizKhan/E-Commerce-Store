@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ApplicationController < ActionController::Base
   # before_action :authenticate_user!
   before_action :configure_permitted_parameters, if: :devise_controller?
@@ -8,12 +10,13 @@ class ApplicationController < ActionController::Base
   protected
 
   def configure_permitted_parameters
-    attributes = [:first_name,:last_name, :email, :avatar]
+    attributes = %i[first_name last_name email avatar]
     devise_parameter_sanitizer.permit(:sign_up, keys: attributes)
     devise_parameter_sanitizer.permit(:account_update, keys: attributes)
   end
 
   private
+
   def current_cart
     if session[:cart_id]
       print session[:cart_id]
@@ -28,12 +31,12 @@ class ApplicationController < ActionController::Base
       end
     end
 
-  if current_user
-    if session[:cart_id] == nil
+    if current_user && session[:cart_id].nil?
       @current_cart = Cart.create
-      @current_cart.user_id = current_user. id
+      @current_cart.user_id = current_user.id
       session[:cart_id] = current_user.id
-      end
     end
   end
+
+
 end

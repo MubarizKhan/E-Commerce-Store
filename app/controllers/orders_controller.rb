@@ -1,64 +1,70 @@
+# frozen_string_literal: true
+
 class OrdersController < ApplicationController
   def index
-    # @order = Order.find_by(user_id: current_user.id)
+    @orders = current_user.orders.all
+  end
+
+  def show
+
     @order = current_user.orders.last
     @order_line_items = LineItem.where(order_id: @order.id)
-    # ;l;l;l
   end
 
   def create
-    if Order.find_by(user_id: current_user.id)
-      print "########################"
-      print "###### In IF #########"
+
+    if Order.where(status: 0).any?
+      @order = Order.where(status: "newly_created")
+
+    elsif Order.where(status: 1).any?
+      @order = Order.where(status: 1)
+
     else
-      print "###### In else #########"
-      Order.create(user_id: current_user.id)
+      @order = Order.create(order_params.merge(user_id: current_user.id))
     end
-    redirect_to root_path
+
+    redirect_to orders_path
   end
 
-  def add_to_order
-    @order = Order.find_by(user_id: current_user.id)
-    @line_item = @current_cart.line_items.find(params[:id])
-    # print @line_item.cart_id
-    @line_item.order_id = @order.id
-    # print @line_item.order_id
-    @line_item.save
-    # print params[:id]
-  end
 
   def update
-    @order = Order.find_by(user_id: current_user.id)
-    @order.coupon_name = params[:order][:coupon_name]
-    @order.save
 
-    @coupon = Coupon.find_by(coupon_name: params[:order][:coupon_name])
-    # print params.inspect
+    @order = Order.find_by(user_id: current_user.id)
+    @order.update(coupon_name: params[:order][:coupon_name])
+
   end
 
   def checkout
-    @order = Order.find_by(user_id: current_user.id)
+
+    @order = Order.find_by(user_id: current_user.id, status: "adding_items")
     @coupon = Coupon.find_by(coupon_name: @order.coupon_name)
+    price_var = 0
+
+    LineItem.where(order_id: @order.id).all.each do |c|
+      price_var += c.total_line_item_price
+      p =  Product.find(c.product_id)
+      p.item_quantity -= c.quantity
+      print p.item_quantity
+      p.save
+
+    end
+
+    @line_items = LineItem.where(order_id: @order.id).all
 
     if @coupon
-      @order_line_items = LineItem.where(order_id: @order.id)
-      price_var = 0
-      LineItem.where(order_id: @order.id).all.each do |c|
-        price_var += c.total_line_item_price
-      end
-      print price_var * (1 - @coupon.discount)
       @order.order_amount = price_var * (1 - @coupon.discount)
-      @order.save
     else
-      print 'this coupon does not exist'
+      @order.order_amount = price_var
     end
-    # print @coupon.coupon_name
-    # print "^^^^"
 
+    @order.completed!
+    @order.save
+    @line_items.destroy_all
+    create
 
   end
 
   def order_params
-    params.require(:order).permit(:user_id)
+    params.permit(:user_id)
   end
 end

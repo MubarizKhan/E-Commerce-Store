@@ -3,14 +3,14 @@
 <%= form_with model: @product do |form| %>
     <div class='form-group'>
       <%= form.label :cover_picture%>
-      <%= form.file_field :cover_picture%>
+      <%= form.file_field :cover_picture, class:"form-control form-control-sm"%>
 
     </div>
 
     <div class="mb-3 row">
     <div class="field form-group">
     <%= form.label :name %><br>
-    <%= form.text_field :name %>
+    <%= form.text_field :name, class:"form-control form-control-sm" %>
     <% @product.errors.full_messages_for(:name).each do |message| %>
       <div><%= message %></div>
     <% end %>
@@ -20,7 +20,7 @@
   <div class="mb-3 row">
   <div class="field form-group">
     <%= form.label :item_price %><br>
-    <%= form.text_field :item_price %>
+    <%= form.text_field :item_price, class:"form-control form-control-sm" %>
     <% @product.errors.full_messages_for(:item_price).each do |message| %>
       <div><%= message %></div>
     <% end %>
@@ -30,7 +30,7 @@
   <div class="mb-3 row">
   <div class="field form-group">
     <%= form.label :item_quantity %><br>
-    <%= form.text_field :item_quantity %>
+    <%= form.text_field :item_quantity, class:"form-control form-control-sm" %>
     <% @product.errors.full_messages_for(:item_quantity).each do |message| %>
       <div><%= message %></div>
     <% end %>

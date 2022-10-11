@@ -1,5 +1,6 @@
-<h1> CART ID IS <%= @current_cart.id %> </h1>
-<h1> we are going to show line items here </h1>
+<%# <h1> CART ID IS <%= @current_cart.id   %>
+<%# </h1> %>
+<h1> Carts#show </h1>
 
 <%# <br><br> %>
 
@@ -19,6 +20,7 @@
     <% @current_cart.line_items.each do |item| %>
     <tr>
       <td class="CBT">
+        <%= item.id %>
         <form action="<%= li_on_carts_path(item.id) %>">
           <input type="checkbox" name="li_id" value="<% item.id %>">
           <%=item.id %>
