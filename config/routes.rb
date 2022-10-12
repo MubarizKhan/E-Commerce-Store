@@ -22,6 +22,7 @@ Rails.application.routes.draw do
 
 
   resources :users
+  get "users/:id/choose_role", to: "users#choose_role", as: "choose_role"
   root 'products#index'
 
 end

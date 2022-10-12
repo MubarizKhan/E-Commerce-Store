@@ -27,7 +27,9 @@ class ProductsController < ApplicationController
 
   def create
 
-    if current_user.products.create(product_params)
+    @product = current_user.products.create(product_params)
+    if @product
+      current_user.add_role :seller, @product
       redirect_to root_path
     else
       render :new
