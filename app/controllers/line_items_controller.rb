@@ -19,7 +19,7 @@ class LineItemsController < ApplicationController
     end
 
     @line_item = @current_cart.line_items.find(params[:id])
-    @line_item.order_id = @order.id
+    @line_item.update(order_id: @order.id)
     @order.adding_items!
     @order.save
     @line_item.save

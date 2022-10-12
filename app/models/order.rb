@@ -8,6 +8,7 @@ class Order < ApplicationRecord
   has_many :line_items
   belongs_to :coupon, optional: true
 
+  # has_many :users, through: :roles, class_name: 'User', source: :users
 
 
 end

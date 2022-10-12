@@ -31,6 +31,7 @@ class OrdersController < ApplicationController
 
     @order = Order.find_by(user_id: current_user.id)
     @order.update(coupon_name: params[:order][:coupon_name])
+    @order.save
 
   end
 
@@ -53,8 +54,10 @@ class OrdersController < ApplicationController
 
     if @coupon
       @order.order_amount = price_var * (1 - @coupon.discount)
+
     else
       @order.order_amount = price_var
+
     end
 
     @order.completed!

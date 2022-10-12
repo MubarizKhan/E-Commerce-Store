@@ -10,9 +10,10 @@ class Product < ApplicationRecord
   has_one_attached :cover_picture
 
   def create_Product_serialID
+    o = [('a'..'z'), ('A'..'Z')].map(&:to_a).flatten
+    string = (0...4).map { o[rand(o.length)] }.join
 
-    s_id =  "Product--" + (Product.count).to_s
-    # topic_status = 'Topic Status Updated!'
+    s_id =  self.name + (Product.count).to_s + string
     update_column(:serial_id, s_id)
 
   end

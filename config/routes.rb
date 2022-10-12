@@ -25,4 +25,3 @@ Rails.application.routes.draw do
   root 'products#index'
 
 end
-# app/controllers/application_controller.rb
