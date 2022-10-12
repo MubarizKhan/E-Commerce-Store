@@ -3,9 +3,8 @@
 <p>are you seller? <%= current_user.has_role? :seller %></p>
 
 <%= current_user.roles.pluck(:name) %>
-<% if current_user.roles_name[0] != "seller"%>
-<% controller.redirect_to choose_role_path(current_user.id)%>
-<% end %>
+
+
 <table class="table table-striped table-bordered table-hover">
   <thead class="table-dark">
     <tr>

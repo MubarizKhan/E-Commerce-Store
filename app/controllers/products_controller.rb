@@ -29,7 +29,15 @@ class ProductsController < ApplicationController
 
     @product = current_user.products.create(product_params)
     if @product
+      print product_params.inspect
+
+      print "%%%%%%%&&&&"
+      print @product
+      print "%%%%%%% &&&&"
+      # print @product.id #"%%%%%%%&&&&"
       current_user.add_role :seller, @product
+      print "<---%%%%%%%&&&&"
+
       redirect_to root_path
     else
       render :new

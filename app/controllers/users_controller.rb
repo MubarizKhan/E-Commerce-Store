@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
 
+  # rolify
+
   def new
     @user = User.new
   end
@@ -11,15 +13,12 @@ class UsersController < ApplicationController
     # end
   end
 
-  def update
-    @user = current_user
-    if @user.update(user_params)
-      params.inspect
-      redirect_to root_path
-    else
-      render :choose_role, status: :unprocessable_entity
-    end
+  def buyer
+    current_user.add_role :buyer
+  end
 
+  def seller
+    current_user.add_role :seller
   end
 
 

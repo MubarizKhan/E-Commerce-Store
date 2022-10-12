@@ -63,4 +63,4 @@ gem 'net-smtp', require: false
 gem "rolify"
 
 
-# gem 'byebug'
+gem 'pundit'

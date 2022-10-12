@@ -1,17 +1,20 @@
 class Product < ApplicationRecord
 
+  resourcify
+
   after_create :create_Product_serialID
-  # belongs_to :user
+  belongs_to :user
 
   has_many :line_items
   has_many :carts, through: :line_items
 
   has_many :comments, dependent: :destroy
 
-  resourcify
 
-  belongs_to :users
-  belongs_to :sellers, -> { where(roles: {name: :seller}) }, class_name: 'User'
+
+  # belongs_to :users
+  # belongs_to :sellers, -> { where(roles: {name: :seller}) }, class_name: 'User'
+  # belongs_to :seller, class_name: 'User'
   # belongs_to :buyers, -> { where(roles: {name: :buyer}) }, class_name: 'User'
 
 
