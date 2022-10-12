@@ -28,17 +28,15 @@ class ProductsController < ApplicationController
   def create
 
     @product = current_user.products.create(product_params)
+
     if @product
-      print product_params.inspect
-
-      print "%%%%%%%&&&&"
-      print @product
-      print "%%%%%%% &&&&"
-      # print @product.id #"%%%%%%%&&&&"
       current_user.add_role :seller, @product
-      print "<---%%%%%%%&&&&"
 
+      if current_user.has_role? :newuser
+        current_user.remove_role :newuser
+      end
       redirect_to root_path
+
     else
       render :new
     end

@@ -7,10 +7,6 @@ class UsersController < ApplicationController
   end
 
   def choose_role
-    @user = current_user
-    # if Product.where(user_id: current_user.id)
-      # @user.add_role :seller# , Product.where(user_id: current_user.id)
-    # end
   end
 
   def buyer

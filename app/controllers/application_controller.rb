@@ -7,6 +7,8 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :current_cart
 
+  include Pundit::Authorization
+
   protected
 
   def configure_permitted_parameters
