@@ -18,19 +18,15 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:account_update, keys: attributes)
   end
 
-
-
-
-
   private
 
   def user_not_authorized
-    print "%%%%%% NOT AUTHORIZED $$$$$$$$"
-    print "%%%%%% NOT AUTHORIZED $$$$$$$$"
-    print "%%%%%% NOT AUTHORIZED $$$$$$$$"
-    print "%%%%%% NOT AUTHORIZED $$$$$$$$"
-    flash[:alert] = "You are not authorized to perform this action."
-    redirect_to root_path #(fallback_location: root_path)
+    print '%%%%%% NOT AUTHORIZED $$$$$$$$'
+    print '%%%%%% NOT AUTHORIZED $$$$$$$$'
+    print '%%%%%% NOT AUTHORIZED $$$$$$$$'
+    print '%%%%%% NOT AUTHORIZED $$$$$$$$'
+    flash[:alert] = 'You are not authorized to perform this action.'
+    redirect_to root_path # (fallback_location: root_path)
     # end
   end
 

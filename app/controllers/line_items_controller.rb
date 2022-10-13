@@ -11,7 +11,16 @@ class LineItemsController < ApplicationController
   end
 
   def update_orderNum
-    @order = current_user.orders.last || Order.find_or_create_by(user_id: current_user.id)
+    @order = if Order.where(user_id: current_user.id, status: 0).any?
+               Order.where(user_id: current_user.id, status: 0)
+
+             elsif Order.where(user_id: current_user.id, status: 1).any?
+               Order.where(user_id: current_user.id, status: 1)
+
+             else
+
+               Order.create(user_id: current_user.id)
+             end
 
     @line_item = @current_cart.line_items.find(params[:id])
     @line_item.update(order_id: @order.id)

@@ -6,14 +6,14 @@ class ProductsController < ApplicationController
 
   def index
     @products = Product.all
-    @user = current_user
+    # @user = current_user
 
     authorize @products
   end
 
   def new
     @product = Product.new
-    @user = current_user
+    @user = current_user # if i dont do this line; throws an error because of pundit authorization
     authorize @product
   end
 
