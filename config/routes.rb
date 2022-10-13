@@ -20,13 +20,11 @@ Rails.application.routes.draw do
   get 'orders/order', to: 'orders#order', as: 'place_order'
 
 
-
-
-
   resources :users
   get "users/:id/choose_role", to: "users#choose_role", as: "choose_role"
   post 'users/:id/buyer', to:"users#buyer", as:"buyer"
   post 'users/:id/seller', to:"users#seller", as:"seller"
+
   root 'products#index'
 
 end

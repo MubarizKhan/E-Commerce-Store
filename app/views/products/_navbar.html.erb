@@ -26,6 +26,10 @@
             </li>
 
             <li class="nav-item">
+            <%= link_to current_user.email, root_path, class:"nav-link" %>
+          </li>
+
+            <li class="nav-item">
              <%= link_to "View cart", carts_path, method: :get, class:"nav-link" %>
             </li>
 

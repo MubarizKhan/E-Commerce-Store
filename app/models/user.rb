@@ -1,6 +1,7 @@
-class User < ApplicationRecord
+# frozen_string_literal: true
 
-  rolify :before_add => :before_add_method
+class User < ApplicationRecord
+  rolify before_add: :before_add_method
   after_create :assign_default_role
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -14,10 +15,8 @@ class User < ApplicationRecord
   has_one_attached :display_picture
   has_one :cart, dependent: :destroy
 
+  attr_accessor :first_name, :last_name
 
-
-  attr_accessor :first_name
-  attr_accessor :last_name
   before_create :set_names
 
   # belongs_to :resource, polymorphic: true
@@ -25,24 +24,18 @@ class User < ApplicationRecord
   # has_many :products, source: :resource, source_type: :Post
   # has_many :seller_products, -> { where(roles: {name: :seller}) }, source: :resource, source_type: :Product
 
-
-
-  def before_add_method(role)
+  def before_add_method(_role)
     # do something before it gets added
-    print "SOME THING IS HAPPENING"
+    print 'SOME THING IS HAPPENING'
   end
-
-
-
-
 
   def assign_default_role
-    self.add_role(:newuser) if self.roles.blank?
+    add_role(:newuser) if roles.blank?
   end
 
-   private
+  private
 
-   def set_names
-      self.full_name = first_name + last_name
-   end
+  def set_names
+    self.full_name = first_name + last_name
+  end
 end

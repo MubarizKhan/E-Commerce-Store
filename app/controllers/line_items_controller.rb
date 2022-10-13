@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class LineItemsController < ApplicationController
   before_action :set_line_item, only: %i[remove_lineItem_from_order destroy]
   before_action :set_line_item_product, only: %i[reduce_quantity add_quantity]
@@ -9,14 +11,7 @@ class LineItemsController < ApplicationController
   end
 
   def update_orderNum
-    # @order = Order.all.where(user_id: current_user.id)
-    if current_user.orders.last
-      @order = current_user.orders.last
-
-    else
-      @order = Order.find_or_create_by(user_id: current_user.id)
-
-    end
+    @order = current_user.orders.last || Order.find_or_create_by(user_id: current_user.id)
 
     @line_item = @current_cart.line_items.find(params[:id])
     @line_item.update(order_id: @order.id)
@@ -27,14 +22,12 @@ class LineItemsController < ApplicationController
   end
 
   def set_total_line_item_price(line_item, chosen_product)
-
     @line_item = line_item
     @line_item.total_line_item_price = line_item.quantity * chosen_product.item_price
     @line_item.save
   end
 
   def add_quantity
-
     @line_item.quantity += 1
     set_total_line_item_price(@line_item, @chosen_product)
     @line_item.save
@@ -45,9 +38,7 @@ class LineItemsController < ApplicationController
     end
   end
 
-
   def reduce_quantity
-
     @line_item.quantity -= 1
 
     if @line_item.quantity.zero?
@@ -65,7 +56,6 @@ class LineItemsController < ApplicationController
   end
 
   def destroy
-
     @line_item.destroy
     respond_to do |format|
       format.html { redirect_to root_path, notice: '@line_item was successfully destroyed.' }
@@ -74,7 +64,6 @@ class LineItemsController < ApplicationController
   end
 
   def remove_lineItem_from_order
-
     @line_item.order_id = 0
     @line_item.save
 

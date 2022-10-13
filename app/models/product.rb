@@ -1,5 +1,6 @@
-class Product < ApplicationRecord
+# frozen_string_literal: true
 
+class Product < ApplicationRecord
   resourcify
 
   after_create :create_Product_serialID
@@ -10,22 +11,17 @@ class Product < ApplicationRecord
 
   has_many :comments, dependent: :destroy
 
-
-
   # belongs_to :users
   # belongs_to :sellers, -> { where(roles: {name: :seller}) }, class_name: 'User'
   # belongs_to :seller, class_name: 'User'
   # belongs_to :buyers, -> { where(roles: {name: :buyer}) }, class_name: 'User'
 
-
   has_one_attached :cover_picture
 
   def create_Product_serialID
-
     o = [('a'..'z'), ('A'..'Z')].map(&:to_a).flatten
     string = (0...4).map { o[rand(o.length)] }.join
-    s_id =  self.name + (Product.count).to_s + string
+    s_id = name + Product.count.to_s + string
     update_column(:serial_id, s_id)
-
   end
 end

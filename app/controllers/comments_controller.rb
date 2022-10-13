@@ -5,7 +5,6 @@ class CommentsController < ApplicationController
   before_action :set_comment, only: %i[edit update destroy]
 
   def create
-
     @comment = @product.comments.create(comment_params.merge(user_id: current_user.id))
     respond_to do |format|
       format.html { redirect_to product_path(@product), notice: '@comment successfully created.' }
@@ -16,7 +15,6 @@ class CommentsController < ApplicationController
   def edit; end
 
   def update
-
     if @comment.update(comment_params)
       redirect_to root_path
     else
@@ -25,7 +23,6 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-
     if @comment.destroy
       respond_to do |format|
         format.html { redirect_to root_path, notice: '@comment was successfully destroyed.' }
@@ -34,7 +31,6 @@ class CommentsController < ApplicationController
     else
       @comment.errors.full_messages.join('/n')
     end
-
   end
 
   private
