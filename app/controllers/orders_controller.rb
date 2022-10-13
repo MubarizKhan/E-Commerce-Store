@@ -16,8 +16,9 @@ class OrdersController < ApplicationController
   end
 
   def update
-    @order = Order.find_by(user_id: current_user.id)
+    @order = Order.last
     @order.update(coupon_name: params[:order][:coupon_name])
+    @order.save
   end
 
   def checkout
@@ -46,7 +47,7 @@ class OrdersController < ApplicationController
     @order.completed!
     @order.save
     @line_items.destroy_all
-    # create
+
   end
 
   def order_params

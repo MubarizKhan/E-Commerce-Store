@@ -7,6 +7,9 @@ class LineItemsController < ApplicationController
 
   def create
     @line_item = @current_cart.line_items.find_or_create_by(lineItem_params)
+    print "PARAMS HERE"
+    print "8888888888888888888888888"
+    print params.inspect
     set_total_line_item_price(@line_item, Product.find(@line_item.product_id))
   end
 
@@ -15,6 +18,7 @@ class LineItemsController < ApplicationController
                Order.where(user_id: current_user.id, status: 0)
 
              elsif Order.where(user_id: current_user.id, status: 1).any?
+
                Order.where(user_id: current_user.id, status: 1)
 
              else
@@ -23,9 +27,25 @@ class LineItemsController < ApplicationController
              end
 
     @line_item = @current_cart.line_items.find(params[:id])
-    @line_item.update(order_id: @order.id)
-    @order.adding_items!
-    @order.save
+
+    # if @order.is_a?(Array)
+      if @order.ids[0]
+      @line_item.update(order_id: @order.ids[0])
+      @order[0].adding_items!
+      @order[0].save
+
+      else
+      @line_item.update(order_id: @order.id)
+      @order.adding_items!
+      @order.save
+
+#
+    # else
+      # @line_item.update(order_id: @order.ids)
+      # @order[0].adding_items!
+      # @order[0].save
+    end
+
     @line_item.save
     redirect_to carts_path
   end
