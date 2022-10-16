@@ -1,6 +1,9 @@
-console.log('in deletion');
 
 $('.remove_comment').bind('ajax:success', function() {
-	$(this).closest('li').remove();
+	console.log('in success');
+	$(this).closest('ul').remove();
+	console.log(this);
+
+	<%# console.log('df?'); %>
 
 });

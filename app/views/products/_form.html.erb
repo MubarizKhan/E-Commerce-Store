@@ -1,35 +1,64 @@
+<section class="vh-100 gradient-custom">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+        <div class="card bg-dark text-white" style="border-radius: 1rem;">
+          <div class="card-body p-5 text-center">
+            <div class="mb-md-5 mt-md-4 pb-5">
+
+            <%= form_with model: @product do |form| %>
+              <div class='form-group'>
+                <%= form.label :cover_picture, class:'form-label'%>
+                <%= form.file_field :cover_picture, class:"form-control"%>
+              </div>
+
+              <br>
+
+              <div class="mb-3 row">
+              <div class="field form-group">
+              <%= form.label :name, class:'form-label' %><br>
+              <%= form.text_field :name, class:"form-control" %>
+              <% @product.errors.full_messages_for(:name).each do |message| %>
+                <div><%= message %></div>
+              <% end %>
+            </div>
+            </div>
+
+            <br>
+            <div class="mb-3 row">
+            <div class="field form-group">
+              <%= form.label :item_price, class:'form-label' %><br>
+              <%= form.text_field :item_price, class:"form-control" %>
+              <% @product.errors.full_messages_for(:item_price).each do |message| %>
+                <div><%= message %></div>
+              <% end %>
+            </div>
+            </div>
+
+            <br>
+            <div class="mb-3 row">
+            <div class="field form-group">
+              <%= form.label :item_quantity ,class:'form-label'%><br>
+              <%= form.text_field :item_quantity, class:"form-control" %>
+              <% @product.errors.full_messages_for(:item_quantity).each do |message| %>
+                <div><%= message %></div>
+              <% end %>
+            </div>
+            </div>
+
+            </br>
+            <div class="actions">
+              <%= form.submit class:'btn btn-secondary' %>
+            </div>
+          <% end %>
 
 
-<%= form_with model: @product do |form| %>
-  <%# <div> %>
-    <div class='form-group form-control form-control-sm'>
-      <%= form.label :cover_picture %>
-      <%= form.file_field :cover_picture%>
+
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
+</section>
 
-  <div class="mb-3">
-  <div class="field form-group form-control form-control-sm">
-    <%= form.label :name %><br>
-    <%= form.text_field :name %>
-    <% @product.errors.full_messages_for(:name).each do |message| %>
-      <div><%= message %></div>
-    <% end %>
-  </div>
-  </div>
-
-  <div class="mb-3">
-    <div class="field form-group form-control form-control-sm">
-    <%= form.label :item_quantity %><br>
-    <%= form.text_field :item_quantity %>
-    <% @product.errors.full_messages_for(:item_quantity).each do |message| %>
-      <div><%= message %></div>
-    <% end %>
-  </div>
-  </div>
-
-
-  </br>
-  <div class="actions">
-    <%= form.submit class:'btn btn-secondary' %>
-  </div>
-<% end %>

@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 class UsersController < ApplicationController
-  before_action :remove_newuser_role, only: %i[seller buyer]
+  # before_action :remove_newuser_role, only: %i[seller buyer]
 
   def new
-    @user = User.new
+    @user = User.new(user_params)
   end
 
   def choose_role; end
@@ -23,9 +23,5 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:full_name, :display_picture, :email, { role_ids: [] })
-  end
-
-  def remove_newuser_role
-    current_user.remove_role :newuser if current_user.has_role? :newuser
   end
 end

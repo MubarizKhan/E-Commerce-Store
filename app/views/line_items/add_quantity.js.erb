@@ -1,25 +1,41 @@
+<%# https://stackoverflow.com/questions/6773550/get-id-of-div-from-its-class-name %>
+var q = document.getElementsByClassName("Q");
+
+$(".add_Q").bind('ajax:success', function(evt, data, status, xhr) {
+
+  object_index = $('.add_Q').index(this);
+
+  for (i = 0; i < q.length; i++) {
 
 
-var quantity = document.getElementById("Q")
-<%# console.log(typeof quantity.innerHTML); %>
+      <%# Quantity to change; it's id %>
+      id = "X" + i.toString();
+      <%# Quantity to convert to int then back to str %>
+      qid = document.getElementById(id).innerHTML.replace(/\s/g, '');
+      updated_quantity = 0
+      updated_quantity = + qid
+      updated_quantity += 1
 
-num = 0
-num = + quantity.innerHTML
-num += 1
-console.log(typeof num, num, "this is num")
-<%# console.log(quantity) %>
+      <%# Now we have the new updated value  %>
+      updated_quantity_str = updated_quantity.toString();
+      buttonclick = "add_Q" + i.toString();
 
-str_num = num.toString();
+      if (document.getElementsByClassName("add_Q")[object_index].id == buttonclick)
+      {
+          break;
+      }
+  }
 
-console.log("str_num", str_num)
+   document.getElementById(buttonclick).addEventListener("click", function()
+    {
 
-$('.add_Q').bind('ajax:success', function(evt, data, status, xhr) {
-    <%# evt.preventDefault(); %>
-    document.getElementById("Q").innerHTML = str_num;
-    <%# $(this).closest("td").innerHTML = str_num; %>
-    <%# $(this).closest("td").append(str_num); %>
-    <%# $('#Q').closest("td").replaceWith(str_num); %>
+        console.log(updated_quantity_str);
+        document.getElementById(id).innerHTML = updated_quantity_str;
+        console.log("in bind success ");
 
-    console.log(document.getElementById("Q").innerHTML)
+    })
+
+
+
   })
 

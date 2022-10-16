@@ -19,9 +19,11 @@ class Product < ApplicationRecord
   has_one_attached :cover_picture
 
   def create_Product_serialID
-    o = [('a'..'z'), ('A'..'Z')].map(&:to_a).flatten
-    string = (0...4).map { o[rand(o.length)] }.join
-    s_id = name + Product.count.to_s + string
+
+    randomnum1 = rand(222777)
+    randomnum2 = rand(222777)
+
+    s_id = name + Product.count.to_s + randomnum2.to_s + randomnum1.to_s
     update_column(:serial_id, s_id)
   end
 end

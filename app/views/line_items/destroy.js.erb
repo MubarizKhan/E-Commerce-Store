@@ -1,3 +1,4 @@
 $('.delete_lineItem').bind('ajax:success', function() {
-  $(this).closest('tr').remove();
+  console.log(this);
+  $(this).closest('div.row').remove();
 });

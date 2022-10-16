@@ -6,14 +6,11 @@ class ProductsController < ApplicationController
 
   def index
     @products = Product.all
-    # @user = current_user
-
     authorize @products
   end
 
   def new
     @product = Product.new
-    @user = current_user # if i dont do this line; throws an error because of pundit authorization
     authorize @product
   end
 
@@ -35,10 +32,6 @@ class ProductsController < ApplicationController
 
     if @product
       current_user.add_role :seller, @product
-
-      current_user.remove_role :newuser if current_user.has_role? :newuser
-      redirect_to root_path
-
     else
       render :new
     end

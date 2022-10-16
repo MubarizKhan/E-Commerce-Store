@@ -11,13 +11,14 @@ Rails.application.routes.draw do
     post 'line_items/:id/add', to: 'line_items#add_quantity', as: 'li_aq'
     post 'line_items/:id/red', to: 'line_items#reduce_quantity', as: 'li_rq'
     get 'line_items/:id/on', to: 'line_items#update_orderNum', as: 'li_on'
+    post 'line_items/checkout', to: 'line_items#checkout', as: 'checkout'
 
   end
   put 'line_items/:id/remove', to: 'line_items#remove_lineItem_from_order', as: 'li_ro'
-  resources :orders
 
-  post 'orders/:id/checkout', to: 'orders#checkout', as: 'orders_co'
-  get 'orders/order', to: 'orders#order', as: 'place_order'
+  resources :orders
+  post 'orders/:id/order', to: 'orders#order', as: 'place_order'
+  get 'orders/:id/active_order', to: 'orders#active_order', as: 'active_order'
 
 
   resources :users

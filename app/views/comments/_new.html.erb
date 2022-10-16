@@ -1,2 +1,10 @@
-<%# <render > %>
-<%= render 'form', comment: @comment %>
+<%= form_for [@product, Comment.new], remote: true do |form| %>
+
+  <p>
+    <%= form.label :body %><br>
+    <%= form.text_area :body %>
+  </p>
+  <p>
+    <%= form.submit %>
+  </p>
+<% end %>

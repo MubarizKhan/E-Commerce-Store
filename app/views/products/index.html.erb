@@ -1,49 +1,50 @@
+<h3> All our products </h3>
 
+<section style="background-color: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));">
+  <div class="container py-5">
+    <div class="row">
+      <% @products.each do |product|%>
+      <div class="col-md-12 col-lg-4 mb-4 mb-lg-0">
+        <div class="card" style="background-color: #EFE1CE">
+          <div class="d-flex justify-content-between p-3">
+            <p class="lead mb-0">Available</p>
+          </div>
+          <%# <img src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Products/4.webp" %>
+            <%# class="card-img-top" alt="Laptop" /> %>
 
-<p>are you seller? <%= current_user.has_role? :seller %></p>
+            <%= image_tag product.cover_picture, class:"card-img-top", height: 250 %>
+          <div class="card-body">
+            <div class="d-flex justify-content-between">
+              <% if product.user_id == current_user.id%>
 
+                <p class="small"><a href="#!" class="text-muted"><%= link_to "edit product", edit_product_path(product.id) %></a></p>
+              <% else %>
+              <p class="small"><a href="#!" class="text-muted">Get yours!</a></p>
+              <% end %>
 
-  <% if current_user.roles_name[0] == "newuser"%>
-    <% controller.redirect_to choose_role_path(current_user.id)%>
-  <% end %>
+              <p class="small text-danger"><s>$<%= product.item_price + (0.25 * product.item_price ) %></s></p>
+            </div>
 
-<table class="table table-striped table-bordered table-hover">
-  <thead class="table-dark">
-    <tr>
-      <th scope="col">Product Name</th>
-      <th scope="col">Price</th>
-      <th scope="col">quantity</th>
-      <th scope="col">edit</th>
-      <th scope="col">User</th>
+            <div class="d-flex justify-content-between mb-3">
+              <h5 class="mb-0"><%= link_to product.name, product %></h5>
 
-    </tr>
-  </thead>
+              <h5 class="text-dark mb-0">$<%= product.item_price %></h5>
+            </div>
 
-  <tbody>
-    <% @products.each do |product|%>
-    <tr>
+            <div class="d-flex justify-content-between mb-2">
+              <p class="text-muted mb-0">Available:  <%= link_to product.item_quantity, product %><span class="fw-bold"></span></p>
+            </div>
 
-      <td><%= link_to product.name, product %></td>
-
-      <td> <%= product.item_price %> </td>
-
-      <td>
-          <p> <%= product.item_quantity %> </p>
-      </td>
-
-      <td>
-          <%= link_to "edit product", edit_product_path(product.id) %>
-      </td>
-
-      <td>
-          <%= product.user_id %>
-      </td>
-
-
+          </div>
+        </div>
+      </div>
 
       <% end %>
-    </tr>
-  </tbody>
-</table>
+
+
+    </div>
+  </div>
+</section>
+
 
 

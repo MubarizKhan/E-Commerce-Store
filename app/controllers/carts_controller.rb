@@ -3,6 +3,7 @@
 class CartsController < ApplicationController
   def show
     @cart = current_cart
+    @line_items = current_user.cart.line_items
   end
 
   def destroy

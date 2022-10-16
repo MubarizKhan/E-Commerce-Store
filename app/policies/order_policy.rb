@@ -1,10 +1,10 @@
-# frozen_string_literal: true
-
-class ProductPolicy < ApplicationPolicy
+class OrderPolicy < ApplicationPolicy
   class Scope < Scope
     # NOTE: Be explicit about which records you allow access to!
     def resolve
-      if @user.has_role? :seller
+    #   scope.all
+    # end
+      if @user.has_role? :buyer
         scope.all
       else
         scope.where(content: '')
@@ -13,16 +13,17 @@ class ProductPolicy < ApplicationPolicy
   end
 
   def index?
-    true
+    @user.has_role? :buyer
   end
 
-  def new?
-    @user.has_role? :seller
+  def show?
+    @user.has_role? :buyer
   end
 
-  def create
-    current_user.has_role? :seller
+  def create?
+    @user.has_role? :buyer
   end
 
 end
+
 

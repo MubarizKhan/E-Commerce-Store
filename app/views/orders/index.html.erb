@@ -1,17 +1,12 @@
 
-<% @orders.each do |item| %>
-<%= item.coupon_name%>
-<%= item.user_id%>
-<%= item.id%>
-<% end  %>
+<h1> Order history </h1>
 
-<table class="table table-striped table-bordered table-hover">
+<table class="table table-striped table-dark table-hover">
   <thead class="table-dark">
     <tr>
       <th scope="col"> Total order_amount</th>
       <th scope="col">coupon_name</th>
       <th scope="col">Order Status</th>
-      <th scope="col">View Order</th>
 
     </tr>
   </thead>
@@ -20,15 +15,11 @@
     <% @orders.each do |item| %>
     <tr>
 
-      <td><%= link_to item.order_amount, item %></td>
+      <td><%= link_to item.order_amount, order_path(item.id) %></td>
 
       <td> <%= item.coupon_name %> </td>
 
       <td> <%= item.status %> </td>
-
-      <td>
-          <%= link_to "edit order", order_path(item.id), method: :get %>
-      </td>
 
       <% end %>
     </tr>

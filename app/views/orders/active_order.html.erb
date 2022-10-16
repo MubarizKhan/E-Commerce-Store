@@ -1,0 +1,106 @@
+
+<section class="h-100 gradient-custom">
+<div class="container-fluid">
+
+<div class="container">
+  <!-- Title -->
+  <div class="d-flex justify-content-between align-items-center py-3">
+    <h2 class="h5 mb-0"><a href="#" class="text-muted"></a> Order #16123222</h2>
+  </div>
+
+  <!-- Main content -->
+  <div class="row">
+    <div class="col-lg-8">
+      <!-- Details -->
+      <div class="card mb-4"  style="background-color: #939597">
+        <div class="card-body">
+          <div class="mb-3 d-flex justify-content-between">
+            <div>
+              <span class="me-3"><%= Date.today %></span>
+              <span class="me-3">Order id <%= @order.id %> </span>
+              <span class="me-3">Visa -1234</span>
+              <span class="badge rounded-pill bg-info">SHIPPING</span>
+            </div>
+
+          </div>
+          <table class="table table-borderless">
+            <tbody>
+              <% @order_line_items.each do |item| %>
+              <tr>
+                <td>
+                  <div class="d-flex mb-2">
+                    <div class="flex-shrink-0">
+
+                      <%= image_tag Product.find(item.product_id).cover_picture, class:"img-fluid",  style: "width:35px" %>
+                    </div>
+                    <div class="flex-lg-grow-1 ms-3">
+                      <h6 class="small mb-0"><a href="#" class="text-reset"><%= Product.find(item.product_id).name %></a></h6>
+                      <span class="small">Color: Black</span>
+                    </div>
+                  </div>
+                </td>
+
+                <td><%= item.quantity %></td>
+                <td class="text-end">$<%= item.total_line_item_price %></td>
+              </tr>
+              <tr>
+
+              <% end  %>
+            </tbody>
+            <tfoot>
+              <tr>
+                <td colspan="2">Subtotal</td>
+                <td class="text-end"><%= @order.order_amount %></td>
+              </tr>
+
+              <tr>
+                <td colspan="2">Discount (Code: NEWYEAR)</td>
+                <td class="text-danger text-end">-$10.00</td>
+              </tr>
+              <tr class="fw-bold">
+                <td colspan="2">TOTAL</td>
+                <td class="text-end"><%= @order.order_amount %></td>
+              </tr>
+            </tfoot>
+
+          </table>
+
+          <%= button_to "place order",   place_order_path(@order.id)  , method: :post, class:'delete_ btn btn-danger btn-md', remote: true  %>
+
+        </div>
+      </div>
+
+    </div>
+    <div class="col-lg-4">
+      <!-- Customer Notes -->
+      <div class="card mb-4" style="background-color: #939597">
+        <div class="card-body">
+          <h3 class="h6">Apply Coupon</h3>
+          <%# <p>Sed enim, faucibus litora velit vestibulum habitasse. Cras lobortis cum sem aliquet mauris rutrum. Sollicitudin. Morbi, sem tellus vestibulum porttitor.</p> %>
+            <%= form_with model: @order do |form| %>
+            <%= form.text_field :coupon_name %>
+            <%= form.submit class:'btn btn-primary btn-sm' %>
+            <% end %>
+        </div>
+      </div>
+      <%# <div class="card mb-4" style="background-color: #939597">
+        <!-- Shipping information -->
+        <div class="card-body">
+          <h3 class="h6">Shipping Information</h3>
+          <strong>FedEx</strong>
+          <span><a href="#" class="text-decoration-underline" target="_blank">FF1234567890</a> <i class="bi bi-box-arrow-up-right"></i> </span>
+          <hr>
+          <h3 class="h6">Address</h3>
+          <address>
+            <strong>John Doe</strong><br>
+            1355 Market St, Suite 900<br>
+            San Francisco, CA 94103<br>
+            <abbr title="Phone">P:</abbr> (123) 456-7890
+          </address>
+        </div>
+      </div> %>
+    </div>
+  </div>
+</div>
+  </div>
+</section>

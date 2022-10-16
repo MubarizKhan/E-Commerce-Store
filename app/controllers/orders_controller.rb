@@ -3,10 +3,19 @@
 class OrdersController < ApplicationController
   def index
     @orders = current_user.orders.all
+    authorize @orders
   end
 
   def show
-    @order = current_user.orders.last
+
+    @order = Order.find(params[:id])
+    @order_line_items = LineItem.where(order_id: @order.id)
+    # authorize @order
+  end
+
+  def active_order
+    @order = Order.find(params[:id])
+    # @order = current_user.orders.last
     @order_line_items = LineItem.where(order_id: @order.id)
   end
 
@@ -16,38 +25,16 @@ class OrdersController < ApplicationController
   end
 
   def update
-    @order = Order.last
+    @order = Order.find(params[:id])
     @order.update(coupon_name: params[:order][:coupon_name])
-    @order.save
   end
 
-  def checkout
-    @order = Order.find_by(user_id: current_user.id, status: 'adding_items')
-    @coupon = Coupon.find_by(coupon_name: @order.coupon_name)
-    price_var = 0
-
-    LineItem.where(order_id: @order.id).all.each do |c|
-      price_var += c.total_line_item_price
-      p = Product.find(c.product_id)
-      p.item_quantity -= c.quantity
-      print p.item_quantity
-      p.save
-    end
-
-    @line_items = LineItem.where(order_id: @order.id).all
-
-    @order.order_amount = if @coupon
-                            price_var * (1 - @coupon.discount)
-
-                          else
-                            price_var
-
-                          end
-
-    @order.completed!
-    @order.save
-    @line_items.destroy_all
-
+  def order
+    # @order = Order.find_by(user_id: current_user.id, status: 'adding_items')
+    @order = Order.find(params[:id])
+    price = OrdersManager::OrderManager.new(order: @order).call
+    redirect_to order_path(@order.id)
+    # render :show
   end
 
   def order_params

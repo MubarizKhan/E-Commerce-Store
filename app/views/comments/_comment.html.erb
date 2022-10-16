@@ -2,13 +2,14 @@
 
 
 <% @product.comments.each do |comment| %>
-
+ <ul>
   <li><%= comment.body %></li>
-  <li><%= comment.user_id %></li>
+  <li><%= User.find(comment.user_id).full_name %></li>
   <li><%= comment.id %></li>
   <li><%= link_to 'Edit', edit_product_comment_path(@product, comment) %></li>
-
-
-  <li><%= link_to 'Destroy', product_comment_path(@product.id), method: :delete,class:'remove_comment', data: { confirm: 'Are you sure?' }, :remote => true %></li>
+  <li><%= link_to 'Destroy', product_comment_path(product_id: @product.id, id: comment.id), method: :delete, class:'remove_comment', data: { confirm: 'Are you sure?' }, :remote => true %></li>
+  <hr>
+</ul>
 
 <% end %>
+</div>

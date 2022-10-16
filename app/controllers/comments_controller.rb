@@ -6,10 +6,14 @@ class CommentsController < ApplicationController
 
   def create
     @comment = @product.comments.create(comment_params.merge(user_id: current_user.id))
+
     respond_to do |format|
       format.html { redirect_to product_path(@product), notice: '@comment successfully created.' }
       format.js { render layout: false }
     end
+  end
+
+  def new
   end
 
   def edit; end

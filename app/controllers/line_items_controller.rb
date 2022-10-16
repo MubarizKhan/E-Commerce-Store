@@ -4,62 +4,27 @@ class LineItemsController < ApplicationController
   before_action :set_line_item, only: %i[remove_lineItem_from_order destroy]
   before_action :set_line_item_product, only: %i[reduce_quantity add_quantity]
   before_action :set_line_item_by_product, only: %i[reduce_quantity add_quantity]
+  before_action :set_creation_product, only: %i[create]
 
   def create
-    @line_item = @current_cart.line_items.find_or_create_by(lineItem_params)
-    print "PARAMS HERE"
-    print "8888888888888888888888888"
-    print params.inspect
-    set_total_line_item_price(@line_item, Product.find(@line_item.product_id))
-  end
+    @line_item = authorize @current_cart.line_items.find_or_create_by(lineItem_params)
 
-  def update_orderNum
-    @order = if Order.where(user_id: current_user.id, status: 0).any?
-               Order.where(user_id: current_user.id, status: 0)
+    price = LineItemsManager::LineItemPriceSetter.new(
+      chosen_product: @chosen_product,
+      line_item: @line_item).call
 
-             elsif Order.where(user_id: current_user.id, status: 1).any?
-
-               Order.where(user_id: current_user.id, status: 1)
-
-             else
-
-               Order.create(user_id: current_user.id)
-             end
-
-    @line_item = @current_cart.line_items.find(params[:id])
-
-    # if @order.is_a?(Array)
-      if @order.ids[0]
-      @line_item.update(order_id: @order.ids[0])
-      @order[0].adding_items!
-      @order[0].save
-
-      else
-      @line_item.update(order_id: @order.id)
-      @order.adding_items!
-      @order.save
-
-#
-    # else
-      # @line_item.update(order_id: @order.ids)
-      # @order[0].adding_items!
-      # @order[0].save
-    end
-
-    @line_item.save
     redirect_to carts_path
-  end
 
-  def set_total_line_item_price(line_item, chosen_product)
-    @line_item = line_item
-    @line_item.total_line_item_price = line_item.quantity * chosen_product.item_price
-    @line_item.save
   end
 
   def add_quantity
-    @line_item.quantity += 1
-    set_total_line_item_price(@line_item, @chosen_product)
-    @line_item.save
+
+    res = LineItemsManager::LineItemQuantityAdder.new(
+      chosen_product: @chosen_product, line_item:@line_item).call
+
+    price = LineItemsManager::LineItemPriceSetter.new(
+      chosen_product: @chosen_product,
+      line_item:@line_item).call
 
     respond_to do |format|
       format.html { redirect_to root_path, notice: '@line_item was successfully destroyed.' }
@@ -92,8 +57,15 @@ class LineItemsController < ApplicationController
     end
   end
 
+  def checkout
+
+    @order = Order.find_or_create_by(user_id: current_user.id, status: 'adding_items')
+    result = LineItemsManager::LineItemCheckoutManager.new(order: @order, cart_id: @current_cart.id ).call
+    redirect_to active_order_path(@order.id)
+  end
+
   def remove_lineItem_from_order
-    @line_item.order_id = 0
+    @line_item.order_id = nil
     @line_item.save
 
     respond_to do |format|
@@ -119,4 +91,27 @@ class LineItemsController < ApplicationController
   def set_line_item_by_product
     @line_item = @current_cart.line_items.find_by(product_id: @chosen_product)
   end
+
+  def set_creation_product
+    @chosen_product = Product.find(params[:product_id])
+  end
 end
+
+
+  # def update_orderNum
+  #   @line_item = @current_cart.line_items.find(params[:id])
+
+  #   if current_user.orders.find_by(status: 1)
+  #     @order = current_user.orders.find_by(status: 1)
+
+  #   else
+  #     @order = current_user.orders.create
+  #   end
+
+  #   @line_item.update(order_id: @order.id)
+  #   @order.adding_items!
+  #   @order.save
+  #   @line_item.save
+  #   redirect_to carts_path
+  # end
+
