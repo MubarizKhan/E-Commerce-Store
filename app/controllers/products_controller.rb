@@ -28,8 +28,8 @@ class ProductsController < ApplicationController
 
   def create
     # validation in model - if current_user.seller?
-      @product = current_user.products.create(product_params)
-      authorize @product
+    @product = current_user.products.create(product_params)
+    authorize @product
     # else
     # end
     if @product

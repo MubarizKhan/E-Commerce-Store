@@ -10,11 +10,6 @@ class LineItemsController < ApplicationController
     # line_item_params
     @line_item = authorize @current_cart.line_items.find_or_create_by(lineItem_params)
 
-    LineItemsManager::LineItemPriceSetter.new(
-      line_item: @line_item,
-      chosen_product: @chosen_product
-    ).call
-
     redirect_to carts_path
   end
 
@@ -66,7 +61,7 @@ class LineItemsController < ApplicationController
     if @line_item.destroy
       #
     else
-      #
+
     end
     respond_to do |format|
       format.html { redirect_to root_path, notice: '@line_item was successfully destroyed.' }
@@ -80,15 +75,15 @@ class LineItemsController < ApplicationController
     redirect_to active_order_path(@order.id)
   end
 
-  def remove_lineItem_from_order
-    @line_item.order_id = nil
-    @line_item.save
+  # def remove_lineItem_from_order
+  #   @line_item.order_id = nil
+  #   @line_item.save
 
-    respond_to do |format|
-      format.html { redirect_to root_path, notice: '@line_item destroyed from order' }
-      format.js { render layout: false }
-    end
-  end
+  #   respond_to do |format|
+  #     format.html { redirect_to root_path, notice: '@line_item destroyed from order' }
+  #     format.js { render layout: false }
+  #   end
+  # end
 
   private
 

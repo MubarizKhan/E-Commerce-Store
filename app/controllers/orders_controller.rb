@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 class OrdersController < ApplicationController
-  before_action :set_creation_order, only: %i[show active_order update order]
+  before_action :set_order, only: %i[show active_order update order]
+  before_action :set_line_items, only: %i[show active_order]
 
   def index
     @orders = current_user.orders.all
@@ -9,14 +10,10 @@ class OrdersController < ApplicationController
   end
 
   def show
-    @order_line_items = @order.line_items
     authorize @order
   end
 
-  def active_order
-    # ditto
-    @order_line_items = LineItem.where(order_id: @order.id)
-  end
+  def active_order; end
 
   def create
     Order.create(order_params.merge(user_id: current_user.id))
@@ -25,13 +22,13 @@ class OrdersController < ApplicationController
   end
 
   def update
-    @order.update(coupon_name: coupon_name)
+    @order.update(coupon_name:)
   end
 
   def order
     service_order = OrdersManager::OrderManager.new(order: @order).call
     # price = service_order[:@order]
-    redirect_to order_path(@order.id)#, alerts: service_order[:errors]
+    redirect_to order_path(@order.id) # , alerts: service_order[:errors]
   end
 
   private
@@ -40,11 +37,15 @@ class OrdersController < ApplicationController
     params.permit(:user_id)
   end
 
-  def set_creation_order
+  def set_order
     @order = Order.find(params[:id])
   end
 
   def coupon_name
     params[:order][:coupon_name]
+  end
+
+  def set_line_items
+    @order_line_items = @order.line_items
   end
 end
