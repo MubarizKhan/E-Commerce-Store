@@ -30,8 +30,8 @@ class OrdersController < ApplicationController
 
   def order
     service_order = OrdersManager::OrderManager.new(order: @order).call
-    price = service_order[:order]
-    redirect_to order_path(@order.id), alerts: service_order[:errors]
+    # price = service_order[:@order]
+    redirect_to order_path(@order.id)#, alerts: service_order[:errors]
   end
 
   private
