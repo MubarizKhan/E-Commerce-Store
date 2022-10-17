@@ -27,9 +27,11 @@ class ProductsController < ApplicationController
   end
 
   def create
-    @product = current_user.products.create(product_params)
-    authorize @product
-
+    # validation in model - if current_user.seller?
+      @product = current_user.products.create(product_params)
+      authorize @product
+    # else
+    # end
     if @product
       current_user.add_role :seller, @product
     else
