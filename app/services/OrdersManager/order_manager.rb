@@ -21,9 +21,9 @@ module OrdersManager
         product = Product.find(item.product_id)
         product.item_quantity -= item.quantity
         if product.save && item.update(cart_id: nil)
-          print  "+++++++()()()+++++"
-          print  "+++++++()()()+++++"
-          print  "+++++++()()()+++++"
+          # print  "+++++++()()()+++++"
+          # print  "+++++++()()()+++++"
+          # print  "+++++++()()()+++++"
 
           apply_coupon_discount!
         else
@@ -45,6 +45,8 @@ module OrdersManager
         discounted_price = @order.order_amount - (@order.order_amount * coupon.discount)
         @order.update(order_amount: discounted_price)
       else
+        # begin
+          coupon.errors.full_messages.join('/n')
         # add error message here
         # @order
       end
