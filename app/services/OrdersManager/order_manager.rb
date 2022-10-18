@@ -21,6 +21,7 @@ module OrdersManager
 
         if product.save && item.update(cart_id: nil)
           apply_coupon_discount!
+          # @order
 
         else
           @errors[product: product&.errors&.full_messages&.join(', ')]

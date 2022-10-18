@@ -2,10 +2,11 @@
 
 class LineItem < ApplicationRecord
   belongs_to :cart, optional: true
-  belongs_to :product
   belongs_to :order, optional: true
+  belongs_to :product
+# valida
 
-  # def self.set_price
-  #   self.total_line_item_price = Product.find(self.product_id).item_price * self.quantity
-  # end
+  def set_price
+    self.update(total_line_item_price: product.item_price * quantity)
+  end
 end

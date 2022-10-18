@@ -6,8 +6,9 @@ class OrdersController < ApplicationController
   before_action :set_line_items, only: %i[show active_order]
 
   def index
-    @orders = current_user.orders
-    authorize @orders
+    @completed_orders = authorize current_user.orders.completed_orders
+    @current_orders = authorize current_user.orders.current
+
   end
 
   def show
@@ -24,10 +25,12 @@ class OrdersController < ApplicationController
 
   def update
     @order.update(coupon_name: coupon_name)
+    # @order.update(order_amount: coupon_name(@order))
+    # coupon_name(@order)
   end
 
   def place
-    @coupon = Coupon.find_by(coupon_name: @order.coupon_name)
+    # @coupon = Coupon.find_by(coupon_name: @order.coupon_name)
     service_order = OrdersManager::OrderManager.new(order: @order).call
 
     print '[{{{{{{{{{{{{{'
@@ -52,6 +55,25 @@ class OrdersController < ApplicationController
   def set_order
     @order = Order.find(params[:id])
   end
+
+  # def coupon_name(order)
+  #   @coupon = Coupon.find_by(coupon_name: params[:order][:coupon_name])
+
+  #   if @coupon
+  #     order.calculate_discount(@coupon)
+  #   else
+
+  #     begin
+  #       @errors[coupon: coupon.errors.full_messages.join(', ')]
+  #     rescue NoMethodError
+  #       nil
+  #     end
+
+  #   end
+    # print "{}{}{}" * 20
+    # print params.inspect
+    # print "{}{}{}" * 20
+  # end
 
   def coupon_name
     params[:order][:coupon_name]

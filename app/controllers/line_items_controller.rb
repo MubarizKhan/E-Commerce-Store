@@ -10,10 +10,11 @@ class LineItemsController < ApplicationController
   def create
     # line_item_params
     @line_item = authorize @current_cart.line_items.find_or_create_by(line_item_params)
-    LineItemsManager::LineItemPriceSetter.new(
-      chosen_product: @chosen_product,
-      line_item: @line_item
-    ).call
+    @line_item.set_price#(@chosen_product)
+    # LineItemsManager::LineItemPriceSetter.new(
+    #   chosen_product: @chosen_product,
+    #   line_item: @line_item
+    # ).call
 
     redirect_to carts_path
   end
