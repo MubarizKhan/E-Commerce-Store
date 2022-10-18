@@ -26,7 +26,7 @@ class LineItemsController < ApplicationController
       chosen_product: @chosen_product, line_item: @line_item
     ).call # , quantity: line_item_params[:quantity]
 
-    price = LineItemsManager::LineItemPriceSetter.new(
+    LineItemsManager::LineItemPriceSetter.new(
       chosen_product: @chosen_product,
       line_item: @line_item
     ).call
@@ -38,20 +38,9 @@ class LineItemsController < ApplicationController
   end
 
   def reduce_quantity
-    @line_item.quantity -= 1
+    @line_item.reduce_quantity
+    @line_item.set_price
 
-    if @line_item.quantity.zero?
-      @line_item.destroy
-    # else
-      # set_total_line_item_price(@line_item, @chosen_product)
-    end
-
-    # @line_item.save!
-    # new_arr = arr.truncate
-    # arr
-    # new_arr
-    # arr.truncate!
-    # arr
     if @line_item.save
       respond_to do |format|
         format.html { redirect_to root_path, notice: '@line_item was successfully reduced.' }
@@ -78,16 +67,6 @@ class LineItemsController < ApplicationController
     redirect_to active_order_order_path(@order.id)
   end
 
-  # def remove_lineItem_from_order
-  #   @line_item.order_id = nil
-  #   @line_item.save
-
-  #   respond_to do |format|
-  #     format.html { redirect_to root_path, notice: '@line_item destroyed from order' }
-  #     format.js { render layout: false }
-  #   end
-  # end
-
   private
 
   def line_item_params
@@ -111,19 +90,9 @@ class LineItemsController < ApplicationController
   end
 end
 
-# def update_orderNum
-#   @line_item = @current_cart.line_items.find(params[:id])
-
-#   if current_user.orders.find_by(status: 1)
-#     @order = current_user.orders.find_by(status: 1)
-
-#   else
-#     @order = current_user.orders.create
-#   end
-
-#   @line_item.update(order_id: @order.id)
-#   @order.adding_items!
-#   @order.save
-#   @line_item.save
-#   redirect_to carts_path
-# end
+# @line_item.save!
+    # new_arr = arr.truncate
+    # arr
+    # new_arr
+    # arr.truncate!
+    # arr

@@ -9,6 +9,8 @@ class Product < ApplicationRecord
   has_many :line_items
   has_many :carts, through: :line_items
 
+  delegate :name, to: :line_items
+
   has_many :comments, dependent: :destroy
 
   # belongs_to :users
@@ -22,5 +24,9 @@ class Product < ApplicationRecord
   def create_product_serial_id
     s_id = name + Product.count.to_s + rand(222_777).to_s
     update_column(:serial_id, s_id)
+  end
+
+  def product_name
+    "#{name}"
   end
 end
