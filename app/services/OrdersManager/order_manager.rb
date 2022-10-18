@@ -8,20 +8,18 @@ module OrdersManager
 
     def call
       order!
-      result = {order: order!, errors: @errors}
+      result = { order: order!, errors: @errors }
     end
 
     private
 
     def order!
-
       @order.line_items.each do |item|
         product = Product.find(item.product_id)
         product.item_quantity -= item.quantity
 
         if product.save && item.update(cart_id: nil)
           apply_coupon_discount!
-          # @order
 
         else
           @errors[product: product&.errors&.full_messages&.join(', ')]
@@ -56,4 +54,3 @@ module OrdersManager
     end
   end
 end
-
