@@ -19,7 +19,6 @@ class User < ApplicationRecord
 
   before_create :set_names
 
-
   def before_add_method(_role)
     # do something before it gets added
     print 'SOME THING IS HAPPENING'

@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class LineItemsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_line_item, only: %i[remove_lineItem_from_order destroy]
   before_action :set_line_item_product, only: %i[reduce_quantity add_quantity]
   before_action :set_line_item_by_product, only: %i[reduce_quantity add_quantity]
@@ -8,15 +9,20 @@ class LineItemsController < ApplicationController
 
   def create
     # line_item_params
-    @line_item = authorize @current_cart.line_items.find_or_create_by(lineItem_params)
+    @line_item = authorize @current_cart.line_items.find_or_create_by(line_item_params)
+    LineItemsManager::LineItemPriceSetter.new(
+      chosen_product: @chosen_product,
+      line_item: @line_item
+    ).call
 
     redirect_to carts_path
   end
 
   def add_quantity
-    res = LineItemsManager::LineItemQuantityAdder.new(
+    # @line_item.increment_by_1!
+    LineItemsManager::LineItemQuantityAdder.new(
       chosen_product: @chosen_product, line_item: @line_item
-    ).call
+    ).call # , quantity: line_item_params[:quantity]
 
     price = LineItemsManager::LineItemPriceSetter.new(
       chosen_product: @chosen_product,
@@ -24,7 +30,7 @@ class LineItemsController < ApplicationController
     ).call
 
     respond_to do |format|
-      format.html { redirect_to root_path, notice: '@line_item was successfully destroyed.' }
+      format.html { redirect_to root_path, notice: '@line_item was successfully updated.' }
       format.js { render layout: false }
     end
   end
@@ -46,7 +52,7 @@ class LineItemsController < ApplicationController
     # arr
     if @line_item.save
       respond_to do |format|
-        format.html { redirect_to root_path, notice: '@line_item was successfully destroyed.' }
+        format.html { redirect_to root_path, notice: '@line_item was successfully reduced.' }
         format.js { render layout: false }
       end
     else
@@ -58,11 +64,6 @@ class LineItemsController < ApplicationController
   end
 
   def destroy
-    if @line_item.destroy
-      #
-    else
-
-    end
     respond_to do |format|
       format.html { redirect_to root_path, notice: '@line_item was successfully destroyed.' }
       format.js { render layout: false }
@@ -70,7 +71,7 @@ class LineItemsController < ApplicationController
   end
 
   def checkout
-    @order = Order.find_or_create_by(user_id: current_user.id, status: :adding_items)
+    @order = Order.find_or_create_by(user_id: current_user.id, status: :in_progress)
     result = LineItemsManager::LineItemCheckoutManager.new(order: @order, cart_id: @current_cart.id).call
     redirect_to active_order_path(@order.id)
   end
@@ -87,7 +88,7 @@ class LineItemsController < ApplicationController
 
   private
 
-  def lineItem_params
+  def line_item_params
     params.permit(:cart_id, :product_id, :quantity)
   end
 

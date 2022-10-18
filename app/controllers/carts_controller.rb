@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class CartsController < ApplicationController
+  before_action :authenticate_user!
+
   def show
     @cart = current_cart
     @line_items = current_user.cart.line_items

@@ -53,13 +53,15 @@
                 <td class="text-end"><%= @order.order_amount %></td>
               </tr>
 
+              <% if @order.coupon_name != nil%>
               <tr>
-                <td colspan="2">Discount (Code: NEWYEAR)</td>
-                <td class="text-danger text-end">-$10.00</td>
+                <td colspan="2">Discount (Code: <%= @order.coupon_name %>)</td>
+                <td class="text-danger text-end">-$<%= disc = @order.order_amount * Coupon.find_by(coupon_name: @order.coupon_name).discount %></td>
               </tr>
+              <% end %>
               <tr class="fw-bold">
                 <td colspan="2">TOTAL</td>
-                <td class="text-end"><%= @order.order_amount %></td>
+                <td class="text-end"><%= @order.order_amount - disc.to_d %></td>
               </tr>
             </tfoot>
 
@@ -83,22 +85,6 @@
             <% end %>
         </div>
       </div>
-      <%# <div class="card mb-4" style="background-color: #939597">
-        <!-- Shipping information -->
-        <div class="card-body">
-          <h3 class="h6">Shipping Information</h3>
-          <strong>FedEx</strong>
-          <span><a href="#" class="text-decoration-underline" target="_blank">FF1234567890</a> <i class="bi bi-box-arrow-up-right"></i> </span>
-          <hr>
-          <h3 class="h6">Address</h3>
-          <address>
-            <strong>John Doe</strong><br>
-            1355 Market St, Suite 900<br>
-            San Francisco, CA 94103<br>
-            <abbr title="Phone">P:</abbr> (123) 456-7890
-          </address>
-        </div>
-      </div> %>
     </div>
   </div>
 </div>

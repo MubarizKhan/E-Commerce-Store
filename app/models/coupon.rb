@@ -2,4 +2,6 @@
 
 class Coupon < ApplicationRecord
   has_many :orders
+
+  # validates
 end

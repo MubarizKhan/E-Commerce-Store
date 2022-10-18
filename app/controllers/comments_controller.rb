@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class CommentsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_product, only: %i[create edit update destroy]
   before_action :set_comment, only: %i[edit update destroy]
 
@@ -8,8 +9,9 @@ class CommentsController < ApplicationController
     @comment = @product.comments.create(comment_params.merge(user_id: current_user.id))
 
     respond_to do |format|
-      format.html { redirect_to product_path(@product), notice: '@comment successfully created.' }
-      format.js { render layout: false }
+      format.html { redirect_to product_path(@product), notice: 'Commented!' }
+      format.js { render layout: false } # read about it.
+      # format.js
     end
   end
 
@@ -28,18 +30,21 @@ class CommentsController < ApplicationController
   def destroy
     if @comment.destroy
       respond_to do |format|
-        format.html { redirect_to root_path, notice: '@comment was successfully destroyed.' }
+        format.html { redirect_to root_path, notice: 'Comment removed!' }
         format.js { render layout: false }
       end
     else
-      @comment.errors.full_messages.join('/n')
+      respond_to do |format|
+        format.html { redirect_to root_path, notice: @comment.errors.full_messages.join('/n') }
+        format.js { render layout: false }
+      end
     end
   end
 
   private
 
   def comment_params
-    params.require(:comment).permit(:body, :user_id, :product_id)
+    params.require(:comment).permit(:body, :user_id, :product_id) # no need for user id
   end
 
   def set_product

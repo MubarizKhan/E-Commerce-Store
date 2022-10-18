@@ -1,11 +1,12 @@
 # frozen_string_literal: true
 
 class OrdersController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_order, only: %i[show active_order update order]
   before_action :set_line_items, only: %i[show active_order]
 
   def index
-    @orders = current_user.orders.all
+    @orders = current_user.orders
     authorize @orders
   end
 
@@ -16,19 +17,30 @@ class OrdersController < ApplicationController
   def active_order; end
 
   def create
-    Order.create(order_params.merge(user_id: current_user.id))
-    # current_user.orders.create(order_params)
+    # Order.create(order_params.merge(user_id: current_user.id))
+    current_user.orders.create(order_params)
     redirect_to orders_path
   end
 
   def update
-    @order.update(coupon_name:)
+    @order.update(coupon_name: coupon_name)
   end
 
   def order
+    @coupon = Coupon.find_by(coupon_name: @order.coupon_name)
     service_order = OrdersManager::OrderManager.new(order: @order).call
-    # price = service_order[:@order]
-    redirect_to order_path(@order.id) # , alerts: service_order[:errors]
+
+    print '[{{{{{{{{{{{{{'
+    print '[{{{{{{{{{{{{{'
+    print(service_order[:errors])
+    print '[{{{{{{{{{{{{{'
+    print '[{{{{{{{{{{{{{'
+
+    if service_order
+      redirect_to order_path(@order.id), alert: service_order[:errors]
+    else
+      render json: service_order.errors, alert: service_order[:errors]
+    end
   end
 
   private
