@@ -10,6 +10,15 @@ class LineItem < ApplicationRecord
   def set_price
     update(total_line_item_price: product.item_price * quantity)
   end
+
+  def reduce_quantity
+    print " hitting " * 20
+    self.quantity -= 1
+
+    if quantity.zero?
+      self.destroy
+    end
+  end
 end
 
 # class LineItem < ApplicationRecord
