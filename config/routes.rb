@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  root 'products#index'
+
   devise_for :users
 
   resources :products do
@@ -11,8 +13,8 @@ Rails.application.routes.draw do
     member do
       post :add, to: 'line_items#add_quantity', as: 'add_quantity'
       post 'red', to: 'line_items#reduce_quantity', as: 'reduce_quantity'
-      # get :on, to: 'line_items#update_orderNum', as: 'li_on'
     end
+
     collection do
       post 'checkout', to: 'line_items#checkout', as: 'checkout'
     end
@@ -29,16 +31,37 @@ Rails.application.routes.draw do
   # end
   # put 'line_items/:id/remove', to: 'line_items#remove_lineItem_from_order', as: 'li_ro'
 
-  resources :orders
-  post 'orders/:id/order', to: 'orders#order', as: 'place_order'
-  get 'orders/:id/active_order', to: 'orders#active_order', as: 'active_order'
+  resources :orders do
+    member do
+      post :place, to: 'orders#order', as: 'place_order'
+      get :active_order
+    end
+  end
+
+  resources :users do
+    member do
+      get :choose_role
+      post :buyer
+      post :seller
+    end
+  end
 
 
-  resources :users
-  get "users/:id/choose_role", to: "users#choose_role", as: "choose_role"
-  post 'users/:id/buyer', to:"users#buyer", as:"buyer"
-  post 'users/:id/seller', to:"users#seller", as:"seller"
+  # resources :orders do
+    # member do
+      # post :order, to: 'orders#order', as: 'place_order'
+      # get :active_order, to: 'orders#active_order', as: 'active_order'
+    # end
+  # end
+#
+#
+#
+  # resources :users do
+    # member do
+      # get :choose_role, to:'users#choose_role', as: 'choose_role'
+      # post :buyer, to:'users#buyer', as:'buyer'
+      # post :seller, to:'users#seller', as:'seller'
+    # end
 
-  root 'products#index'
 
 end

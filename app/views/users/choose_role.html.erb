@@ -2,9 +2,9 @@
 <%= current_user.id %>
 
 
-<div> <%= button_to "become buyer", buyer_path(current_user.id), method: :post, class:'btn btn-primary btn-md' %></div>
+<div> <%= button_to "become buyer", buyer_user_path(current_user.id), method: :post, class:'btn btn-primary btn-md' %></div>
 <br>
-<div> <%= button_to "become seller",  seller_path(current_user.id),  method: :post, class:'btn btn-danger btn-md'  %></div>
+<div> <%= button_to "become seller",  seller_user_path(current_user.id),  method: :post, class:'btn btn-danger btn-md'  %></div>
 
 
 <%# <% end %> %>

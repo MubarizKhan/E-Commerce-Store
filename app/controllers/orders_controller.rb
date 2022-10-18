@@ -26,7 +26,7 @@ class OrdersController < ApplicationController
     @order.update(coupon_name: coupon_name)
   end
 
-  def order
+  def place
     @coupon = Coupon.find_by(coupon_name: @order.coupon_name)
     service_order = OrdersManager::OrderManager.new(order: @order).call
 

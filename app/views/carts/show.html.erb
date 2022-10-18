@@ -5,7 +5,7 @@
   <thead>
     <tr>
       <%# <th scope="col"> Select </th> %>
-      <th scope="col"> Add to Order </th>
+      <%# <th scope="col"> Add to Order </th> %>
       <th scope="col"> product name </th>
       <th scope="col"> quantity </th>
       <th scope="col"> Increase/Decrease </th>
@@ -20,11 +20,11 @@
 
     <tr>
 
-        <td>
-          <form action="<%= li_on_carts_path(item.id) %>">
-          <input type="submit" value="<%= count.to_s %>" class="btn btn-primary btn-md" id="X">
-          </form>
-        </td>
+        <%# <td> %>
+          <%# <form action="<%= li_on_carts_path(item.id) %>"> %>
+          <%# <input type="submit" value="<%= count.to_s %>" class="btn btn-primary btn-md" id="X"> %>
+          <%# </form> %>
+        <%# </td> %>
 
       <td>
         <%= item.product.name %>
@@ -44,13 +44,13 @@
       <%= add_id%>
 
       <td>
-        <div class = "add_Q" id="<%= add_id %>"> <%= button_to "+", li_aq_carts_path(item.product_id), method: :post, class:'btn btn-primary btn-md', remote: true  %></div>
-        <div class="red_Q"> <%= button_to "--",  li_rq_carts_path(item.product_id),  method: :post, class:'btn btn-danger btn-md', remote: true %></div>
+        <div class = "add_Q" id="<%= add_id %>"> <%= button_to "+", add_quantity_line_item_path(item.product_id), method: :post, class:'btn btn-primary btn-md', remote: true  %></div>
+        <div class="red_Q"> <%= button_to "--",  reduce_quantity_line_item_path(item.product_id),  method: :post, class:'btn btn-danger btn-md', remote: true %></div>
       </td>
 
       <td>
         <div class="delete_lineItem">
-          <%= button_to "Remove",  carts_line_item_path(item.id), method: :delete, data: { confirm: 'Are you sure?'}, class:'delete_ btn btn-danger btn-md', remote: true  %>
+          <%= button_to "Remove",  line_item_path(item.id), method: :delete, data: { confirm: 'Are you sure?'}, class:'delete_ btn btn-danger btn-md', remote: true  %>
         </div>
         <% count += 1 %>
         <% end %>
@@ -60,7 +60,7 @@
   </tbody>
 </table>
 
-<%= button_to "Checkout",   checkout_carts_path  , method: :post, class:'delete_ btn btn-danger btn-md', remote: true  %>
+<%= button_to "Checkout",   checkout_line_items_path  , method: :post, class:'delete_ btn btn-danger btn-md', remote: true  %>
 
 
 
@@ -108,7 +108,7 @@
 
 
                 <div class="delete_lineItem">
-                    <%= button_to "Remove",  carts_line_item_path(item.id), method: :delete, data: { confirm: 'Are you sure?'}, class:'delete_ btn btn-danger btn-md', remote: true  %>
+                    <%= button_to "Remove", line_item_path(item.id), method: :delete, data: { confirm: 'Are you sure?'}, class:'delete_ btn btn-danger btn-md', remote: true  %>
                 </div>
 
                 <!-- Data -->
@@ -119,7 +119,7 @@
 
                 <div class="d-flex mb-4" style="max-width: 300px">
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <div class="red_Q"> <%= button_to "--",  li_rq_carts_path(item.product_id),  method: :post, class:'btn btn-danger px-3 ms-2', remote: true %></div>
+                <div class="red_Q"> <%= button_to "--",  reduce_quantity_line_item_path(item.product_id),  method: :post, class:'btn btn-danger px-3 ms-2', remote: true %></div>
 
 
                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -128,7 +128,7 @@
                   </div>
                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-                  <div class="add_Q"> <%= button_to "+", li_aq_carts_path(item.product_id), method: :post, class:'btn btn-primary px-3 ms-2', remote: true  %></div>
+                  <div class="add_Q"> <%= button_to "+", add_quantity_line_item_path(item.product_id), method: :post, class:'btn btn-primary px-3 ms-2', remote: true  %></div>
                 </div>
 
                 </div>
@@ -141,7 +141,7 @@
 
             </div></div>
 
-             <%= button_to "Checkout",  checkout_carts_path , method: :post, class:'delete_ btn btn-danger btn-md', remote: true  %>
+             <%= button_to "Checkout",  checkout_line_items_path , method: :post, class:'delete_ btn btn-danger btn-md', remote: true  %>
             </div></div>
 
         </div>
