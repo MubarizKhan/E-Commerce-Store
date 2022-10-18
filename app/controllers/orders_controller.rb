@@ -8,7 +8,6 @@ class OrdersController < ApplicationController
   def index
     @completed_orders = authorize current_user.orders.completed_orders
     @current_orders = authorize current_user.orders.current
-
   end
 
   def show
@@ -24,7 +23,7 @@ class OrdersController < ApplicationController
   end
 
   def update
-    @order.update(coupon_name: coupon_name)
+    @order.update(coupon_name:)
     # @order.update(order_amount: coupon_name(@order))
     # coupon_name(@order)
   end
@@ -70,9 +69,9 @@ class OrdersController < ApplicationController
   #     end
 
   #   end
-    # print "{}{}{}" * 20
-    # print params.inspect
-    # print "{}{}{}" * 20
+  # print "{}{}{}" * 20
+  # print params.inspect
+  # print "{}{}{}" * 20
   # end
 
   def coupon_name

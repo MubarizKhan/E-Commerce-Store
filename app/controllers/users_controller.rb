@@ -25,5 +25,3 @@ class UsersController < ApplicationController
     params.require(:user).permit(:full_name, :display_picture, :email, { role_ids: [] })
   end
 end
-
-

@@ -10,7 +10,8 @@ class LineItemsController < ApplicationController
   def create
     # line_item_params
     @line_item = authorize @current_cart.line_items.find_or_create_by(line_item_params)
-    @line_item.set_price#(@chosen_product)
+    @line_item.set_price
+    # (@chosen_product)
     # LineItemsManager::LineItemPriceSetter.new(
     #   chosen_product: @chosen_product,
     #   line_item: @line_item
@@ -74,7 +75,7 @@ class LineItemsController < ApplicationController
   def checkout
     @order = Order.find_or_create_by(user_id: current_user.id, status: :in_progress)
     result = LineItemsManager::LineItemCheckoutManager.new(order: @order, cart_id: @current_cart.id).call
-    redirect_to  active_order_order_path(@order.id)
+    redirect_to active_order_order_path(@order.id)
   end
 
   # def remove_lineItem_from_order

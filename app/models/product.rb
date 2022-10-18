@@ -11,7 +11,6 @@ class Product < ApplicationRecord
 
   has_many :comments, dependent: :destroy
 
-
   # belongs_to :users
   # belongs_to :sellers, -> { where(roles: {name: :seller}) }, class_name: 'User'
   # belongs_to :seller, class_name: 'User'
