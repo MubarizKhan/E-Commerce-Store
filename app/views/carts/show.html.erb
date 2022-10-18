@@ -1,71 +1,3 @@
-<h1> CART ID IS <%= @current_cart.id %> </h1> %>
-<h1> Carts#show </h1>
-
-<table class="table table-striped table-dark">
-  <thead>
-    <tr>
-      <%# <th scope="col"> Select </th> %>
-      <%# <th scope="col"> Add to Order </th> %>
-      <th scope="col"> product name </th>
-      <th scope="col"> quantity </th>
-      <th scope="col"> Increase/Decrease </th>
-      <th scope="col"> delete </th>
-    </tr>
-  </thead>
-
-
-  <tbody>
-    <% count = 0%>
-    <% @current_cart.line_items.each do |item| %>
-
-    <tr>
-
-        <%# <td> %>
-          <%# <form action="<%= li_on_carts_path(item.id) %>"> %>
-          <%# <input type="submit" value="<%= count.to_s %>" class="btn btn-primary btn-md" id="X"> %>
-          <%# </form> %>
-        <%# </td> %>
-
-      <td>
-        <%= item.product.name %>
-      </td>
-
-      <% id = ["X", count.to_s].join('') %>
-      <%= id %>
-      <div>
-        <td class= "Q" id= "<%= id %>">
-
-          <%= item.quantity %>
-        </td>
-      </div>
-
-      <% add_id = ["add_Q", count.to_s].join('') %>
-
-      <%= add_id%>
-
-      <td>
-        <div class = "add_Q" id="<%= add_id %>"> <%= button_to "+", add_quantity_line_item_path(item.product_id), method: :post, class:'btn btn-primary btn-md', remote: true  %></div>
-        <div class="red_Q"> <%= button_to "--",  reduce_quantity_line_item_path(item.product_id),  method: :post, class:'btn btn-danger btn-md', remote: true %></div>
-      </td>
-
-      <td>
-        <div class="delete_lineItem">
-          <%= button_to "Remove",  line_item_path(item.id), method: :delete, data: { confirm: 'Are you sure?'}, class:'delete_ btn btn-danger btn-md', remote: true  %>
-        </div>
-        <% count += 1 %>
-        <% end %>
-      </td>
-
-    </tr>
-  </tbody>
-</table>
-
-<%= button_to "Checkout",   checkout_line_items_path  , method: :post, class:'delete_ btn btn-danger btn-md', remote: true  %>
-
-
-
-
-
 <section class="h-100 gradient-custom">
 <div class="container py-5">
 <div class="row d-flex justify-content-center my-4">
@@ -80,13 +12,14 @@
 
           <div class="card-body">
             <!-- Single item -->
+
+            <% count = 0 %>
             <% @current_cart.line_items.each do |item| %>
             <div class="row">
 
 
               <div class="col-lg-3 col-md-12 mb-4 mb-lg-0">
 
-                <!-- Image -->
                 <div class="bg-image hover-overlay hover-zoom ripple rounded" data-mdb-ripple-color="light">
                   <%= image_tag Product.find(item.product_id).cover_picture, class:"w-100" %>
 
@@ -94,13 +27,11 @@
                     <div class="mask" style="background-color: rgba(251, 251, 251, 0.2)"></div>
                   </a>
                 </div>
-                <!-- Image -->
               </div>
 
 
               <div class="col-lg-5 col-md-6 mb-4 mb-lg-0">
 
-                <!-- Data -->
                  <p><strong><%= Product.find(item.product_id).name %></strong></p>
 
                 <strong> <p>Price: <%= Product.find(item.product_id).item_price %> </p> </strong>
@@ -111,32 +42,35 @@
                     <%= button_to "Remove", line_item_path(item.id), method: :delete, data: { confirm: 'Are you sure?'}, class:'delete_ btn btn-danger btn-md', remote: true  %>
                 </div>
 
-                <!-- Data -->
               </div>
-              <%# &nbsp; %>
+
               <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
                 <!-- Quantity -->
 
                 <div class="d-flex mb-4" style="max-width: 300px">
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <div class="red_Q"> <%= button_to "--",  reduce_quantity_line_item_path(item.product_id),  method: :post, class:'btn btn-danger px-3 ms-2', remote: true %></div>
+
+                <% red_id = ["red_Q", count.to_s].join('') %>
+                <div class="red_Q" id="<%= red_id %>"> <%= button_to "--",  reduce_quantity_line_item_path(item.product_id),  method: :post, class:'btn btn-danger px-3 ms-2', remote: true %></div>
 
 
                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
                   <div class="form-outline">
-                    <h3> <%= item.quantity %> </h3>
+                    <% id = ["X", count.to_s].join('') %>
+                    <h3><div class= "Q" id= "<%= id %>"> <%= item.quantity %> </div> </h3>
                   </div>
+
                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-                  <div class="add_Q"> <%= button_to "+", add_quantity_line_item_path(item.product_id), method: :post, class:'btn btn-primary px-3 ms-2', remote: true  %></div>
+                  <% add_id = ["add_Q", count.to_s].join('') %>
+                  <div class="add_Q" id="<%= add_id %>"> <%= button_to "+", add_quantity_line_item_path(item.product_id), method: :post, class:'btn btn-primary px-3 ms-2', remote: true  %></div>
                 </div>
 
                 </div>
 
-                <!-- Price -->
 
-              <%# <p>v</p> %>
                 <hr class="my-4" />
+                <% count += 1%>
                 <% end %>
 
             </div></div>

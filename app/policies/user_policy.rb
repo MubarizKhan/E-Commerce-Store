@@ -7,5 +7,4 @@ class UserPolicy < ApplicationPolicy
     #   scope.all
     # end
   end
-
 end

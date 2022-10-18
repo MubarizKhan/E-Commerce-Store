@@ -23,6 +23,4 @@ class ProductPolicy < ApplicationPolicy
   def create
     current_user.has_role? :seller
   end
-
 end
-

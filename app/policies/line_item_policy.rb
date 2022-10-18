@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class LineItemPolicy < ApplicationPolicy
   class Scope < Scope
     # NOTE: Be explicit about which records you allow access to!
@@ -16,18 +18,16 @@ class LineItemPolicy < ApplicationPolicy
     @user.has_role? :buyer
 
     # if @prod.user_id? :@user.id
-      # false
+    # false
     # else
-      # true
+    # true
     # end
     # if @prod.user_id == @user.id
-      # false
+    # false
     # else
-      # @user.has_role? :buyer
+    # @user.has_role? :buyer
 
-      # scope.all
+    # scope.all
     # end
   end
-
-
 end

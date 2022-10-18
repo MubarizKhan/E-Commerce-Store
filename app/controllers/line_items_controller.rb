@@ -42,8 +42,8 @@ class LineItemsController < ApplicationController
 
     if @line_item.quantity.zero?
       @line_item.destroy
-    else
-      set_total_line_item_price(@line_item, @chosen_product)
+    # else
+      # set_total_line_item_price(@line_item, @chosen_product)
     end
 
     # @line_item.save!
