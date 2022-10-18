@@ -2,7 +2,7 @@
 
 class OrdersController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_order, only: %i[show active_order update order]
+  before_action :set_order, only: %i[show active_order update place]
   before_action :set_line_items, only: %i[show active_order]
 
   def index

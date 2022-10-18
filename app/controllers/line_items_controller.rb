@@ -73,7 +73,7 @@ class LineItemsController < ApplicationController
   def checkout
     @order = Order.find_or_create_by(user_id: current_user.id, status: :in_progress)
     result = LineItemsManager::LineItemCheckoutManager.new(order: @order, cart_id: @current_cart.id).call
-    redirect_to active_order_path(@order.id)
+    redirect_to  active_order_order_path(@order.id)
   end
 
   # def remove_lineItem_from_order
