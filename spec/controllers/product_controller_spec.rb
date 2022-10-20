@@ -23,22 +23,22 @@ RSpec.describe ProductsController, :type => :controller do
   end
 
 
-# RSpec.describe ProductsController, :type => :controller do
-#   describe "responds to" do
-#     it "responds to html by default" do
-#       post :create, :params => { :product => { :name => "Any Name",
-#                                                :item_quantity => 12,
-#                                                :item_price => 12,
-#                                                :user_id => 12 } }
-#       expect(response.content_type).to eq "text/html; charset=utf-8"
-#     end
+RSpec.describe ProductsController, :type => :controller do
+  describe "responds to" do
+    it "responds to html by default" do
+      post :create, :params => { :product => { :name => "Any Name",
+                                               :item_quantity => 12,
+                                               :item_price => 12,
+                                               :user_id => 12 } }
+      expect(response.content_type).to eq "text/html; charset=utf-8"
+    end
 
-#     it "responds to custom formats when provided in the params" do
-#       post :create, :params => { :product => { :name => "Any Name",
-#                                                :item_quantity => 12,
-#                                                :item_price => 12,
-#                                                :user_id => 12 } , :format => :json }
-#       expect(response.content_type).to eq "application/json; charset=utf-8"
-#     end
-#   end
-# end
+    it "responds to custom formats when provided in the params" do
+      post :create, :params => { :product => { :name => "Any Name",
+                                               :item_quantity => 12,
+                                               :item_price => 12,
+                                               :user_id => 12 } , :format => :json }
+      expect(response.content_type).to eq "application/json; charset=utf-8"
+    end
+  end
+end
