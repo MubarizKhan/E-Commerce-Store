@@ -85,5 +85,17 @@ end
     expect(cart .user_id).to eq user.id
   end
 
+  it 'fails if order_amount not updated properly' do
+    result = LineItemsManager::LineItemCheckoutManager.new(order: order, cart_id: cart.id).call
+    price = 0
+    cart.line_items.each do |item|
+      price += item.total_line_item_price.d
+      # expect(item.order_id).to eq order.id
+    end
+
+    expect(order.order_amount).to eq price
+
+  end
+
 
 end
