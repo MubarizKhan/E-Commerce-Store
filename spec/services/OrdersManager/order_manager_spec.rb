@@ -44,7 +44,7 @@ def create_second_line_item
 end
 
 def find_coupon
-  Coupon.find_by(coupon_name: "DevnTech")
+  Coupon.find_by(coupon_name: "Pak14")
 end
 
   user = create_user
@@ -70,23 +70,39 @@ RSpec.describe OrdersManager::OrderManager, 'call' do
     expect(order.status).to eq "completed"
   end
 
+
+  # in progress
   # it 'check order price reduction w/ coupon' do
 
   #   # result = OrdersManager::OrderManager.new(order: order).call
   #   without_coupon = order.order_amount
 
-  #   test_with_coupon = order.order_amount - (order.order_amount * coupon.discount)
+    # print "-" * 5
+    # print coupon.discount
+    # print "-" * 5
+    # print order.order_amount
+    # print "-" * 5
+    # print order.order_amount * coupon.discount
+    # print "-" * 5
+    # print order.order_amount - (order.order_amount * coupon.discount)
 
-  #   order.update(coupon_name: "DevnTech")
+    # test_with_coupon = order.order_amount - (order.order_amount * coupon.discount)
+    # order.update(coupon_name: "Pak14")
 
-  #   print without_coupon
-  #   print "(///)(////)(////)" * 5
-  #   print test_with_coupon
-  #   print "SSSSSSSSSSSSSSSS " * 2
-  #   print order.order_amount
+    # print "--" * 5
+    # print order.coupon_name
+
+    # print without_coupon
+    # print "(///)(////)(////)" * 5
+    # print test_with_coupon
+    # print "SSSSSSSSSSSSSSSS " * 2
+    # print order.order_amount
+
   #   result_with_coupon = OrdersManager::OrderManager.new(order: order).call
+  #   # print result_with_coupon[:order]
   #   expect(order.order_amount).to eq(test_with_coupon)
   # end
+
 
   it 'check line_item cart id to be nil' do
     result = OrdersManager::OrderManager.new(order: order).call
@@ -94,6 +110,6 @@ RSpec.describe OrdersManager::OrderManager, 'call' do
     order.line_items.each do |item|
       expect(item.cart_id).to eq(nil)
     end
-
   end
+
 end

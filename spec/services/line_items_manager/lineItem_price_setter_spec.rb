@@ -22,6 +22,7 @@ end
 
 first_product = create_first_product
 first_line_item = create_first_line_item
+multiple_prod_price_line_item_quantity = first_product.item_price * first_line_item.quantity
 
 RSpec.describe LineItemsManager::LineItemPriceSetter, 'call' do
   it 'check if result is not nil' do
@@ -31,7 +32,7 @@ RSpec.describe LineItemsManager::LineItemPriceSetter, 'call' do
 
   it 'check correct line_item price' do
     result = LineItemsManager::LineItemPriceSetter.new(chosen_product: first_product, line_item: first_line_item).call
-    expect(first_line_item.total_line_item_price).to eq(30)
+    expect(first_line_item.total_line_item_price).to eq(multiple_prod_price_line_item_quantity)
   end
 end
 

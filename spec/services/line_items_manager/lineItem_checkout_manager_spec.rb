@@ -40,14 +40,12 @@ def create_second_line_item
   )
 end
 
+
   cart = create_cart
   order = create_order
   first_line_item = create_first_line_item
   second_line_item = create_second_line_item
   user = create_user
-
-
-
 
   RSpec.describe LineItemsManager::LineItemCheckoutManager, 'call' do
   it 'calculates order_amount & updates order_status' do
