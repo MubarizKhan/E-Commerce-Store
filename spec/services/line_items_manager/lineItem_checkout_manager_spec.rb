@@ -15,7 +15,7 @@ end
 
 def create_order
   # hitting DB here
-  Order.create(
+  Order.new(
     id: 888,
     user_id: 34,
     order_amount: nil
@@ -24,7 +24,7 @@ end
 
 def create_first_line_item
   # hitting DB here
-  LineItem.create(
+  LineItem.new(
     quantity: 3,
     total_line_item_price: 30,
     cart_id: 34
@@ -33,7 +33,7 @@ end
 
 def create_second_line_item
   # hitting DB here
-  LineItem.create(
+  LineItem.new(
     quantity: 4,
     total_line_item_price: 40,
     cart_id: 34
@@ -74,9 +74,16 @@ end
 
   it 'fails when order belongs to someother user' do
     result = LineItemsManager::LineItemCheckoutManager.new(order: order, cart_id: cart.id).call
+    print order.user_id
+    # print '---'  * 20
     expect(order.user_id).to eq user.id
   end
 
+  it 'fails when cart belongs to someother user' do
+    result = LineItemsManager::LineItemCheckoutManager.new(order: order, cart_id: cart.id).call
+    print cart.user_id
+    expect(cart .user_id).to eq user.id
+  end
 
 
 end
