@@ -16,7 +16,7 @@ end
 def create_order
   # hitting DB here
   Order.new(
-    id: 888,
+    id: 999,
     user_id: 34,
     order_amount: nil
   )
@@ -87,10 +87,10 @@ end
 
   it 'fails if order_amount not updated properly' do
     result = LineItemsManager::LineItemCheckoutManager.new(order: order, cart_id: cart.id).call
+
     price = 0
     cart.line_items.each do |item|
-      price += item.total_line_item_price.d
-      # expect(item.order_id).to eq order.id
+      price += item.total_line_item_price
     end
 
     expect(order.order_amount).to eq price
