@@ -7,14 +7,6 @@ def create_first_product
   )
 end
 
-def create_second_product
-  Product.new(
-    id: 13,
-    user_id: 34,
-    item_quantity: 10,
-    item_price: 20
-  )
-end
 
 def create_first_line_item
   # hitting DB here
@@ -26,15 +18,7 @@ def create_first_line_item
   )
 end
 
-def create_second_line_item
-  # hitting DB here
-  LineItem.new(
-    id: 13,
-    quantity: 4,
-    total_line_item_price: 40,
-    cart_id: 34
-  )
-end
+
 
 first_product = create_first_product
 first_line_item = create_first_line_item
@@ -51,3 +35,22 @@ RSpec.describe LineItemsManager::LineItemPriceSetter, 'call' do
   end
 end
 
+
+# def create_second_product
+#   Product.new(
+#     id: 13,
+#     user_id: 34,
+#     item_quantity: 10,
+#     item_price: 20
+#   )
+# end
+
+# def create_second_line_item
+#   # hitting DB here
+#   LineItem.new(
+#     id: 13,
+#     quantity: 4,
+#     total_line_item_price: 40,
+#     cart_id: 34
+#   )
+# end
