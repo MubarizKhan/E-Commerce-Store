@@ -9,7 +9,7 @@ class Product < ApplicationRecord
   has_many :line_items
   has_many :carts, through: :line_items
 
-  delegate :name, to: :line_items
+  # delegate :name, to: :line_items
 
   has_many :comments, dependent: :destroy
 

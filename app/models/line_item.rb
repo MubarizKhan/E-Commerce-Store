@@ -6,7 +6,7 @@ class LineItem < ApplicationRecord
   belongs_to :order, optional: true
   belongs_to :product
 
-  delegate :product_name, :name, to: :item_price, allow_nil: true
+  # delegate :product_name, :name, to: :item_price, allow_nil: true
 
   def set_price
     update(total_line_item_price: product.item_price * quantity)

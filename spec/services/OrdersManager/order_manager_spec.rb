@@ -52,14 +52,14 @@ end
   order = create_order
   first_line_item = order.line_items.find_or_create_by(product_id: 106, cart_id: cart.id, total_line_item_price: 100)
   second_line_item = order.line_items.find_or_create_by(product_id: 108, cart_id: cart.id, total_line_item_price: 800)
-  # first_line_item = create_first_line_item
-  # second_line_item = create_second_line_item
-  #
   coupon = find_coupon
 
 
 
 RSpec.describe OrdersManager::OrderManager, 'call' do
+  # in progress
+
+
   it 'check if result is not nil' do
     result = OrdersManager::OrderManager.new(order: order).call
     expect(result).not_to eq nil
@@ -71,37 +71,16 @@ RSpec.describe OrdersManager::OrderManager, 'call' do
   end
 
 
-  # in progress
-  # it 'check order price reduction w/ coupon' do
+  it 'check order price reduction w/ coupon' do
 
-  #   # result = OrdersManager::OrderManager.new(order: order).call
-  #   without_coupon = order.order_amount
+    without_coupon = order.order_amount
+    test_with_coupon = order.order_amount - (order.order_amount * coupon.discount)
+    order.update(coupon_name: "Pak14")
 
-    # print "-" * 5
-    # print coupon.discount
-    # print "-" * 5
-    # print order.order_amount
-    # print "-" * 5
-    # print order.order_amount * coupon.discount
-    # print "-" * 5
-    # print order.order_amount - (order.order_amount * coupon.discount)
-
-    # test_with_coupon = order.order_amount - (order.order_amount * coupon.discount)
-    # order.update(coupon_name: "Pak14")
-
-    # print "--" * 5
-    # print order.coupon_name
-
-    # print without_coupon
-    # print "(///)(////)(////)" * 5
-    # print test_with_coupon
-    # print "SSSSSSSSSSSSSSSS " * 2
-    # print order.order_amount
-
-  #   result_with_coupon = OrdersManager::OrderManager.new(order: order).call
-  #   # print result_with_coupon[:order]
-  #   expect(order.order_amount).to eq(test_with_coupon)
-  # end
+    result_with_coupon = OrdersManager::OrderManager.new(order: order).call
+    # print result_with_coupon[:order]
+    expect(order.order_amount).to eq(test_with_coupon)
+  end
 
 
   it 'check line_item cart id to be nil' do
